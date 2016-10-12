@@ -1,18 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <jsp:directive.include file="../share/header.jsp" />
 <jsp:directive.include file="../share/checkLogin.jsp" />
 <!-- CONTENT -->
-<form action="" method="post">
+<form action="${pageContext.request.contextPath}/member/modify_submit" method="post">
 	<div class="form-horizontal">
-		<h2>³»Á¤º¸ º¯°æ</h2>
+		<h2>ë‚´ì •ë³´ ë³€ê²½</h2>
 		<hr />
 		<%
 			
 		%>
 		<div class="form-group">
 			<div class="col-sm-2"></div>
-			<div class="col-sm-2">¾ÆÀÌµð</div>
+			<div class="col-sm-2">ì•„ì´ë””</div>
 			<div class="col-sm-6">
 				<input type="text" class="form-control" id="email" name="email" value="${userInfoMap.email }">
 			</div>
@@ -21,7 +21,7 @@
 
 		<div class="form-group">
 			<div class="col-sm-2"></div>
-			<div class="col-sm-2">ºñ¹Ð¹øÈ£</div>
+			<div class="col-sm-2">ë¹„ë°€ë²ˆí˜¸</div>
 			<div class="col-sm-6">
 				<input type="password" class="form-control" id="password" name="password">
 			</div>
@@ -30,7 +30,7 @@
 		
 		<div class="form-group">
 			<div class="col-sm-2"></div>
-			<div class="col-sm-2">ÀÌ¸§</div>
+			<div class="col-sm-2">ì´ë¦„</div>
 			<div class="col-sm-6">
 				<input type="text" class="form-control" id="name" name="name">
 			</div>
@@ -39,7 +39,7 @@
 		
 		<div class="form-group">
 			<div class="col-sm-2"></div>
-			<div class="col-sm-2">»ý³â¿ùÀÏ</div>
+			<div class="col-sm-2">ìƒë…„ì›”ì¼</div>
 			<div class="col-sm-6">
 				<input type="text" class="form-control" id="birthday" name="birthday">
 			</div>
@@ -49,18 +49,18 @@
 		
 		<div class="form-group">
 			<div class="col-sm-2"></div>
-			<div class="col-sm-2">¼ºº°</div>
+			<div class="col-sm-2">ì„±ë³„</div>
 			<div class="col-sm-3">
-				³²¼º : <input type="radio" class="form-control" id="sex" name="sex" value="male">
+				ë‚¨ì„± : <input type="radio" class="form-control" id="sex" name="sex" value="male">
 				
-				¿©¼º : <input type="radio" class="form-control" id="sex" name="sex" value="female">
+				ì—¬ì„± : <input type="radio" class="form-control" id="sex" name="sex" value="female">
 			</div>
 			<div class="col-sm-2"></div>
 		</div>
 		
 
 		<div class="form-group">
-			<input type="submit" value="¼öÁ¤¿Ï·á" class="btn btn-primary" />
+			<input type="submit" value="ìˆ˜ì •ì™„ë£Œ" class="btn btn-primary" />
 		</div>
 	</div>
 </form>

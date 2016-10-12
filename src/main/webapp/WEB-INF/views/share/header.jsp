@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <title>YokyDoky</title>
 <meta charset="utf-8">
@@ -56,12 +56,12 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="${pageContext.request.contextPath}/">ó������</a></li>
-				<li><a href="${pageContext.request.contextPath}/article/list">���Ź�</a>
+				<li><a href="${pageContext.request.contextPath}/">처음으로</a></li>
+				<li><a href="${pageContext.request.contextPath}/article/list">요약신문</a>
 				</li>
-				<li><a href="${pageContext.request.contextPath}/keyword/setting">Ű���弳��</a></li>
-				<li><a href="${pageContext.request.contextPath}/member/modify">������</a></li>
-				<li><a href="${pageContext.request.contextPath}/member/logout">�α׾ƿ�</a></li>
+				<li><a href="${pageContext.request.contextPath}/keyword/setting">키워드설정</a></li>
+				<li><a href="${pageContext.request.contextPath}/member/modify">내정보</a></li>
+				<li><a href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->

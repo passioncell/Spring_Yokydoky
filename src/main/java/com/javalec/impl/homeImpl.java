@@ -24,7 +24,7 @@ public class homeImpl implements HomeController {
 	@Autowired
 	MemberDao memberDao;
 
-	// »ı¼ºÀÚ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public homeImpl() {
 	}
 
@@ -72,11 +72,14 @@ public class homeImpl implements HomeController {
 	@Override
 	public ModelAndView member_modify_submit(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("Welcome member_modify_submit");
 		Map<String, Object> map = func.parseMap(request);
 		System.out.println(map);
 		memberDao.updateMemberInfo(map);
 			
-		return null;
+		ModelAndView mav = new ModelAndView("share/alert");
+		mav.addObject("key", "ìˆ˜ì •ì™„ë£Œ");
+		return mav;
 	}
 
 	@Override
@@ -106,14 +109,14 @@ public class homeImpl implements HomeController {
 		ModelAndView mav = new ModelAndView("member/login");
 		Map<String, Object> map = func.parseMap(request);
 
-		// ¾ÆÀÌµğ Áßº¹°Ë»ç
+		// ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½ï¿½Ë»ï¿½
 		int count = memberDao.checkExistUserId(map);
 
 		if (count != 0) {
-			return new ModelAndView("/error/exist_id");
+			return new ModelAndView("/share/alert").addObject("key", "ì•„ì´ë”” ì¤‘ë³µ");
 		}
 
-		// È¸¿ø°¡ÀÔ
+		// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		memberDao.insertNewMember(map);
 
 		return mav;
@@ -126,19 +129,19 @@ public class homeImpl implements HomeController {
 		
 		Map<String, Object> map = func.parseMap(request);
 
-		// ¾ÆÀÌµğ & ºñ¹Ğ¹øÈ£ Ã¼Å©
+		// ï¿½ï¿½ï¿½Ìµï¿½ & ï¿½ï¿½Ğ¹ï¿½È£ Ã¼Å©
 		int count = memberDao.checkLogin(map);
 
 		if (count == 0) {
-			return new ModelAndView("/error/login");
+			return new ModelAndView("/share/alert").addObject("key", "ì•„ì´ë”” ë¶ˆì¼ì¹˜");
 		}
 
-		// ·Î±×ÀÎ ¼¼¼ÇÃ³¸®
-		System.out.println("·Î±×ÀÎ ¼º°ø!");
+		// ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½
+		
 		session.setAttribute("isLogin", "true");
 		session.setAttribute("userEmail", map.get("email"));
 		System.out
-				.println("¼¼¼ÇÀúÀå  : userEmail : " + map.get("email") + "  isLogin : " + session.getAttribute("isLogin"));
+				.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  : userEmail : " + map.get("email") + "  isLogin : " + session.getAttribute("isLogin"));
 
 		ModelAndView mav = new ModelAndView("index");
 		mav.addObject("isLogin", true);
