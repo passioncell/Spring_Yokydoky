@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="memberDao">
+	
+<!-- 	<typeAlias alias="Member" type="com.javalec.bean.Member" /> -->
+
+	<!--  회원가입 INSERT  -->
+	<insert id="insertNewMember" parameterType="Map" statementType="CALLABLE">
+    {
+    	call insertNewMember(#{email}, #{pw}, #{name}, #{birthday}, #{sex})
+    }
+    </insert>
+    
+    <!--  아이디 중복 검사 -->
+    <select id="checkExistUserId" parameterType="Map" resultType="int" statementType="CALLABLE">
+    	SELECT COUNT(*) FROM Member WHERE email = #{email}
+    </select>
+    
+     <!--  로그인 검사 -->
+    <select id="checkLogin" parameterType="Map" resultType="int" statementType="CALLABLE">
+    	SELECT COUNT(*) FROM Member WHERE email = #{email} AND password = #{pw}
+    </select>
+    
+    <!-- 내정보 불러오기 -->
+	<select id="getMyInfo" parameterType="Map" resultType="Map" statementType="CALLABLE">
+		SELECT * FROM MEMBER WHERE email = #{email}
+	</select>
+</mapper>
