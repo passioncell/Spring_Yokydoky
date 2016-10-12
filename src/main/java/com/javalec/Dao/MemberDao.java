@@ -22,8 +22,8 @@ public class MemberDao extends SqlSessionDaoSupport{
 		return (Integer) getSqlSession().selectOne("memberDao.checkLogin", map);
 	}
 	
-	public List<Object> getMyInfo(Map map){
-		return (List<Object>) getSqlSession().selectList("memberDao.getMyInfo", map);
+	public List<Object> getMyInfo(String eamil){
+		return (List<Object>) getSqlSession().selectList("memberDao.getMyInfo", eamil);
 	}
 	
 }

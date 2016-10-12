@@ -1,13 +1,13 @@
 package com.javalec.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.Constants;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -63,10 +63,12 @@ public class homeImpl implements HomeController {
 		
 		
 		Map<String, Object> map = func.parseMap(request);
-		Map<String, Object> userInfoMap = memberDao.getMyInfo(map);
+		System.out.println(userEmail);
+		System.out.println(memberDao.getMyInfo(userEmail));
+//		List<Object> userInfoMap =  memberDao.getMyInfo(map);
 		
 		ModelAndView mav = new ModelAndView("member/modify");
-		mav.addObject("userInfoMap", userInfoMap);
+//		mav.addObject("userInfoMap", userInfoMap);
 		
 		return mav;
 	}

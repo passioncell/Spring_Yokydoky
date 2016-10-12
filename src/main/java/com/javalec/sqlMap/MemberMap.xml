@@ -23,7 +23,7 @@
     </select>
     
     <!-- 내정보 불러오기 -->
-	<select id="getMyInfo" parameterType="Map" resultType="Map" statementType="CALLABLE">
+	<select id="getMyInfo" parameterType="str" resultType="Map" statementType="CALLABLE">
 		SELECT * FROM MEMBER WHERE email = #{email}
 	</select>
 </mapper>
