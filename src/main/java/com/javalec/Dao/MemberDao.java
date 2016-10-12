@@ -1,12 +1,9 @@
 package com.javalec.Dao;
 
+import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import org.mybatis.spring.support.SqlSessionDaoSupport;
-
-import com.javalec.bean.Member;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class MemberDao extends SqlSessionDaoSupport{
@@ -25,8 +22,8 @@ public class MemberDao extends SqlSessionDaoSupport{
 		return (Integer) getSqlSession().selectOne("memberDao.checkLogin", map);
 	}
 	
-	public Map<String, Object> getMyInfo(Map map){
-		return (Map<String, Object>) getSqlSession().selectList("memberDao.getMyInfo", map);
+	public List<Object> getMyInfo(Map map){
+		return (List<Object>) getSqlSession().selectList("memberDao.getMyInfo", map);
 	}
 	
 }

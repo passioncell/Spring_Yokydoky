@@ -31,6 +31,7 @@ public class homeImpl implements HomeController {
 	@Override
 	public ModelAndView index(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("Welcom index");
 		ModelAndView mav = new ModelAndView("index");
 
 		return mav;
@@ -39,7 +40,7 @@ public class homeImpl implements HomeController {
 	@Override
 	public ModelAndView article_list(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("article_list");
+		System.out.println("Welcom article_list");
 		ModelAndView mav = new ModelAndView("article/list");
 
 		return mav;
@@ -48,7 +49,7 @@ public class homeImpl implements HomeController {
 	@Override
 	public ModelAndView keyword_setting(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("keyword_setting");
+		System.out.println("Welcom keyword_setting");
 		ModelAndView mav = new ModelAndView("keyword/setting");
 
 		return mav;
@@ -57,12 +58,14 @@ public class homeImpl implements HomeController {
 	@Override
 	public ModelAndView member_modify(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("member_modify");
+		System.out.println("Welcom member_modify");
 		String userEmail = (String)session.getAttribute("userEmail");
 		
-		ModelAndView mav = new ModelAndView("member/modify");
-		Map userInfoMap = memberDao.getMyInfo(map);
 		
+		Map<String, Object> map = func.parseMap(request);
+		Map<String, Object> userInfoMap = memberDao.getMyInfo(map);
+		
+		ModelAndView mav = new ModelAndView("member/modify");
 		mav.addObject("userInfoMap", userInfoMap);
 		
 		return mav;
@@ -71,7 +74,7 @@ public class homeImpl implements HomeController {
 	@Override
 	public ModelAndView member_login(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("member_login()");
+		System.out.println("Welcom member_login");
 		ModelAndView mav = new ModelAndView("member/login");
 
 		return mav;
@@ -80,7 +83,8 @@ public class homeImpl implements HomeController {
 	@Override
 	public ModelAndView member_join(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
-
+		System.out.println("Welcom member_join");
+		
 		ModelAndView mav = new ModelAndView("member/join");
 
 		return mav;
@@ -89,6 +93,8 @@ public class homeImpl implements HomeController {
 	@Override
 	public ModelAndView member_join_submit(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("Welcom member_join_submit");
+		
 		ModelAndView mav = new ModelAndView("member/login");
 		Map<String, Object> map = func.parseMap(request);
 
@@ -108,6 +114,8 @@ public class homeImpl implements HomeController {
 	@Override
 	public ModelAndView member_login_submit(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("Welcom member_login_submit");
+		
 		Map<String, Object> map = func.parseMap(request);
 
 		// 아이디 & 비밀번호 체크
@@ -132,7 +140,8 @@ public class homeImpl implements HomeController {
 	@Override
 	public ModelAndView member_logout(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("member_logout");
+		System.out.println("Welcom member_logout");
+		
 		session.setAttribute("isLogin", null);
 		session.setAttribute("userEmail", null);
 
