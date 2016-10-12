@@ -1,5 +1,6 @@
 package com.javalec.Dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,8 +23,8 @@ public class MemberDao extends SqlSessionDaoSupport{
 		return (Integer) getSqlSession().selectOne("memberDao.checkLogin", map);
 	}
 	
-	public List<Object> getMyInfo(String eamil){
-		return (List<Object>) getSqlSession().selectList("memberDao.getMyInfo", eamil);
+	public Map<String, Object> getMyInfo(String eamil){
+		return  getSqlSession().selectOne("memberDao.getMyInfo", eamil);
 	}
 	
 }

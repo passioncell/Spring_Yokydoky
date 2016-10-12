@@ -63,9 +63,9 @@ public class homeImpl implements HomeController {
 		
 		
 		Map<String, Object> map = func.parseMap(request);
-		System.out.println(userEmail);
-		System.out.println(memberDao.getMyInfo(userEmail));
-//		List<Object> userInfoMap =  memberDao.getMyInfo(map);
+
+		Map<String, Object> userInfoMap = memberDao.getMyInfo(userEmail);
+		System.out.println(userInfoMap.get("sex"));
 		
 		ModelAndView mav = new ModelAndView("member/modify");
 //		mav.addObject("userInfoMap", userInfoMap);
