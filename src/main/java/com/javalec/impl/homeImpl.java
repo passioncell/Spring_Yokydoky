@@ -159,6 +159,13 @@ public class homeImpl implements HomeController {
 		return new ModelAndView("member/login");
 	}
 
+	@Override
+	public ModelAndView searchToJSON(HttpServletRequest request, HttpSession session) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("Welcom searchToJSON");
+		return null;
+	}
+
 	
 
 }

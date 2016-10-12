@@ -13,43 +13,47 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public abstract interface HomeController {
 
-	// ¸ÞÀÎ
+	// ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/")
 	public abstract ModelAndView index(HttpServletRequest request, HttpSession session) throws Exception;
 
-	// ½Å¹®±â»ç ¸®½ºÆ®
+	// ï¿½Å¹ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	@RequestMapping("/article/list")
 	public abstract ModelAndView article_list(HttpServletRequest request, HttpSession session) throws Exception;
 
-	// Å°¿öµå ¼³Á¤
+	// Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/keyword/setting")
 	public abstract ModelAndView keyword_setting(HttpServletRequest request, HttpSession session) throws Exception;
 
-	// ³»Á¤º¸ º¯°æ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/member/modify")
 	public abstract ModelAndView member_modify(HttpServletRequest request, HttpSession session) throws Exception;
 	
-	// ³»Á¤º¸ º¯°æ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/member/modify_submit")
 	public abstract ModelAndView member_modify_submit(HttpServletRequest request, HttpSession session) throws Exception;
 
-	// ·Î±×ÀÎ(VIEW)
+	// ï¿½Î±ï¿½ï¿½ï¿½(VIEW)
 	@RequestMapping("/member/login")
 	public abstract ModelAndView member_login(HttpServletRequest request, HttpSession session) throws Exception;
 
-	// ·Î±×ÀÎ(SUBMIT)
+	// ï¿½Î±ï¿½ï¿½ï¿½(SUBMIT)
 	@RequestMapping("/member/login_submit")
 	public abstract ModelAndView member_login_submit(HttpServletRequest request, HttpSession session) throws Exception;
 
-	// È¸¿ø°¡ÀÔ(VIEW)
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(VIEW)
 	@RequestMapping("/member/join")
 	public abstract ModelAndView member_join(HttpServletRequest request, HttpSession session) throws Exception;
 
-	// È¸¿ø°¡ÀÔ(SUBMIT)
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(SUBMIT)
 	@RequestMapping("/member/join_submit")
 	public abstract ModelAndView member_join_submit(HttpServletRequest request, HttpSession session) throws Exception;
+	
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(SUBMIT)
+	@RequestMapping("/keyword/searchToJSON")
+	public abstract ModelAndView searchToJSON(HttpServletRequest request, HttpSession session) throws Exception;
 
-	// ·Î±×¾Æ¿ô
+	// ï¿½Î±×¾Æ¿ï¿½
 	@RequestMapping("/member/logout")
 	public abstract ModelAndView member_logout(HttpServletRequest request, HttpSession session) throws Exception;
 
