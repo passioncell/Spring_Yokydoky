@@ -1,21 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <jsp:directive.include file="share/header.jsp" />
 <jsp:directive.include file="share/checkLogin.jsp" />
 <h3>
 	<%
 		Object obj1 = session.getAttribute("userEmail");
 		String mySessionName = (String) obj1;
-		out.println(mySessionName + "´Ô ¾È³çÇÏ¼¼¿ä");
+		out.println(mySessionName + "ë‹˜ ì•ˆë…•í•˜ì„¸ìš”");
 	%>
 </h3>
 <div class="jumbotron">
-	<h1>YokyDoky¶õ?</h1>
-	<p class="lead">µö·¯´×À» ÀÌ¿ëÇÑ ½º¸¶Æ® ½Å¹® ¿ä¾à ¾îÇÃ¸®ÄÉÀÌ¼Ç ÀÔ´Ï´Ù.</p>
-	<p>±âº»ÀûÀ¸·Î ±â»ç ¿ø¹®À» ¿ä¾àÇØ¼­ º¸¿©µå¸®¸ç »ç¿ëÀÚ°¡ ¼±È£ÇÏ´Â Å°¿öµå¸¦ ¼³Á¤ÇÏ¸é °ü·Ã Å°¿öµåµéÀÌ Æ÷ÇÔµÈ ±â»çµµ
-		¿ä¾àÇÏ¿© Á¦°øÇÕ´Ï´Ù.</p>
+	<h1>YokyDokyëž€?</h1>
+	<p class="lead">ë”¥ëŸ¬ë‹ì„ ì´ìš©í•œ ìŠ¤ë§ˆíŠ¸ ì‹ ë¬¸ ìš”ì•½ ì–´í”Œë¦¬ì¼€ì´ì…˜ ìž…ë‹ˆë‹¤.</p>
+	<p>ê¸°ë³¸ì ìœ¼ë¡œ ê¸°ì‚¬ ì›ë¬¸ì„ ìš”ì•½í•´ì„œ ë³´ì—¬ë“œë¦¬ë©° ì‚¬ìš©ìžê°€ ì„ í˜¸í•˜ëŠ” í‚¤ì›Œë“œë¥¼ ì„¤ì •í•˜ë©´ ê´€ë ¨ í‚¤ì›Œë“œë“¤ì´ í¬í•¨ëœ ê¸°ì‚¬ë„
+		ìš”ì•½í•˜ì—¬ ì œê³µí•©ë‹ˆë‹¤.</p>
 	<p>
-		<a href="article/list" class="btn btn-primary btn-lg">º¸·¯°¡±â&raquo;</a>
+		<a href="article/list" class="btn btn-primary btn-lg">ë³´ëŸ¬ê°€ê¸°&raquo;</a>
 
 	</p>
 </div>
@@ -23,23 +23,23 @@
 <div class="row">
 	<div class="col-md-4">
 		<h2>Interface.</h2>
-		<p>¼Õ½±°í ½ÉÇÃÇÑ ÀÎÅÍÆäÀÌ½º.</p>
+		<p>ì†ì‰½ê³  ì‹¬í”Œí•œ ì¸í„°íŽ˜ì´ìŠ¤.</p>
 		<p>
-			<a class="btn btn-default" href="article/list">º¸·¯°¡±â &raquo;</a>
+			<a class="btn btn-default" href="article/list">ë³´ëŸ¬ê°€ê¸° &raquo;</a>
 		</p>
 	</div>
 	<div class="col-md-4">
 		<h2>Summeraize.</h2>
-		<p>±æ¾î¼­ ÀÐ±â Èûµç ½Å¹®±â»ç¸¦ ±¸±Û PageRank ¾Ë°í¸®ÁòÀ» ÀÌ¿ëÇÏ¿© ¿ä¾àÇØµå¸³´Ï´Ù.</p>
+		<p>ê¸¸ì–´ì„œ ì½ê¸° íž˜ë“  ì‹ ë¬¸ê¸°ì‚¬ë¥¼ êµ¬ê¸€ PageRank ì•Œê³ ë¦¬ì¦˜ì„ ì´ìš©í•˜ì—¬ ìš”ì•½í•´ë“œë¦½ë‹ˆë‹¤.</p>
 		<p>
-			<a class="btn btn-default" href="article/list">º¸·¯°¡±â &raquo;</a>
+			<a class="btn btn-default" href="article/list">ë³´ëŸ¬ê°€ê¸° &raquo;</a>
 		</p>
 	</div>
 	<div class="col-md-4">
 		<h2>Recommand.</h2>
-		<p>°ü½ÉºÐ¾ßÀÇ Å°¿öµå¸¦ ¼³Á¤ÇÏ½Ã¸é ÇØ´ç Å°¿öµå´Â ¹°·Ð °ü·Ã¼ºÀÌ ³ôÀº ´Ù¸¥ ±â»çµé±îÁö ¿ä¾àÇØ¼­ º¸¿©µå¸³´Ï´Ù.</p>
+		<p>ê´€ì‹¬ë¶„ì•¼ì˜ í‚¤ì›Œë“œë¥¼ ì„¤ì •í•˜ì‹œë©´ í•´ë‹¹ í‚¤ì›Œë“œëŠ” ë¬¼ë¡  ê´€ë ¨ì„±ì´ ë†’ì€ ë‹¤ë¥¸ ê¸°ì‚¬ë“¤ê¹Œì§€ ìš”ì•½í•´ì„œ ë³´ì—¬ë“œë¦½ë‹ˆë‹¤.</p>
 		<p>
-			<a class="btn btn-default" href="article/list">º¸·¯°¡±â &raquo;</a>
+			<a class="btn btn-default" href="article/list">ë³´ëŸ¬ê°€ê¸° &raquo;</a>
 		</p>
 	</div>
 </div>

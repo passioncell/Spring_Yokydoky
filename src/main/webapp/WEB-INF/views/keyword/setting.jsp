@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <jsp:directive.include file="../share/header.jsp" />
 
 <!-- CONTENT -->
@@ -20,7 +20,7 @@
 	});
 </script>
 
-<h2>³ªÀÇ Å°¿öµå¸¦ Ãß°¡ÇØº¸¼¼¿ä!</h2>
+<h2>ë‚˜ì˜ í‚¤ì›Œë“œë¥¼ ì¶”ê°€í•´ë³´ì„¸ìš”!</h2>
 <br>
 <div class="container" style="margin-top: 5%;">
 	<div class="col-md-6 col-md-offset-3">
@@ -51,7 +51,7 @@
 
 
 
-<h2>³»Å°¿öµå</h2>
+<h2>ë‚´í‚¤ì›Œë“œ</h2>
 <div class="row">
 	<span class="label label-primary">#KEYWORD</span>
 	<span class="label label-primary">#KEYWORD2</span> 
@@ -72,7 +72,7 @@
 						value : request.term
 					},
 					success : function(data) {
-						//¼­¹ö¿¡¼­ json µ¥ÀÌÅÍ response ÈÄ ¸ñ·Ï¿¡ »Ñ·ÁÁÖ±â À§ÇÔ
+						//ì„œë²„ì—ì„œ json ë°ì´í„° response í›„ ëª©ë¡ì— ë¿Œë ¤ì£¼ê¸° ìœ„í•¨
 						response($.map(data, function(item) {
 							return {
 								label : item.keyword,
@@ -82,10 +82,10 @@
 					}
 				});
 			},
-			//Á¶È¸¸¦ À§ÇÑ ÃÖ¼Ò±ÛÀÚ¼ö
+			//ì¡°íšŒë¥¼ ìœ„í•œ ìµœì†Œê¸€ìžìˆ˜
 			minLength : 2,
 			select : function(event, ui) {
-				// ¸¸¾à °Ë»ö¸®½ºÆ®¿¡¼­ ¼±ÅÃÇÏ¿´À»¶§ ¼±ÅÃÇÑ µ¥ÀÌÅÍ¿¡ ÀÇÇÑ ÀÌº¥Æ®¹ß»ý
+				// ë§Œì•½ ê²€ìƒ‰ë¦¬ìŠ¤íŠ¸ì—ì„œ ì„ íƒí•˜ì˜€ì„ë•Œ ì„ íƒí•œ ë°ì´í„°ì— ì˜í•œ ì´ë²¤íŠ¸ë°œìƒ
 			}
 		});
 	})

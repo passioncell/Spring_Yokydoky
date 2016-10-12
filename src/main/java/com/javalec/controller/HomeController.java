@@ -28,6 +28,10 @@ public abstract interface HomeController {
 	// 내정보 변경
 	@RequestMapping("/member/modify")
 	public abstract ModelAndView member_modify(HttpServletRequest request, HttpSession session) throws Exception;
+	
+	// 내정보 변경
+	@RequestMapping("/member/modify_submit")
+	public abstract ModelAndView member_modify_submit(HttpServletRequest request, HttpSession session) throws Exception;
 
 	// 로그인(VIEW)
 	@RequestMapping("/member/login")

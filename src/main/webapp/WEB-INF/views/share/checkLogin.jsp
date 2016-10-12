@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <c:if test="${empty isLogin}">
 	<script>
-		alert('╥н╠вюн го╪е╬ъ гу╢о╢ы.');
+		alert('К║°Й╥╦Л²╦ М∙≤Л┘■Л∙╪ М∙╘К▀┬К▀╓.');
 	</script>
 	<c:redirect url="member/login"></c:redirect>
 	

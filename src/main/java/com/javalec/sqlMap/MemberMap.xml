@@ -26,4 +26,9 @@
 	<select id="getMyInfo" parameterType="str" resultType="Map" statementType="CALLABLE">
 		SELECT * FROM MEMBER WHERE email = #{email}
 	</select>
+	
+	<update id="updateMemberInfo" parameterType="Map" statementType="CALLABLE">
+		UPDATE MEMBER set password = #{password}, name = #{name}, birthday = #{birthday}, sex = #{sex} where email = #{email}
+	</update>
+	
 </mapper>

@@ -27,4 +27,8 @@ public class MemberDao extends SqlSessionDaoSupport{
 		return  getSqlSession().selectOne("memberDao.getMyInfo", eamil);
 	}
 	
+	public void updateMemberInfo(Map map){
+		getSqlSession().update("memberDao.updateMemberInfo", map);
+	}
+	
 }

@@ -59,18 +59,24 @@ public class homeImpl implements HomeController {
 	public ModelAndView member_modify(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("Welcom member_modify");
+		
 		String userEmail = (String)session.getAttribute("userEmail");
-		
-		
-		Map<String, Object> map = func.parseMap(request);
-
 		Map<String, Object> userInfoMap = memberDao.getMyInfo(userEmail);
-		System.out.println(userInfoMap.get("sex"));
 		
 		ModelAndView mav = new ModelAndView("member/modify");
 //		mav.addObject("userInfoMap", userInfoMap);
 		
 		return mav;
+	}
+	
+	@Override
+	public ModelAndView member_modify_submit(HttpServletRequest request, HttpSession session) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = func.parseMap(request);
+		System.out.println(map);
+		memberDao.updateMemberInfo(map);
+			
+		return null;
 	}
 
 	@Override
@@ -149,5 +155,7 @@ public class homeImpl implements HomeController {
 
 		return new ModelAndView("member/login");
 	}
+
+	
 
 }

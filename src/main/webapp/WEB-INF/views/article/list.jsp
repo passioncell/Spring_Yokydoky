@@ -1,14 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <jsp:directive.include file="../share/header.jsp" />
 <ul class="nav nav-pills" role="tablist">
-	<li role="presentation" class="active"><a href="#">ÀüÃ¼</a></li>
-	<li role="presentation"><a href="#">¹®È­</a></li>
-	<li role="presentation"><a href="#">°æÁ¦</a></li>
-	<li role="presentation"><a href="#">±¹Á¦</a></li>
-	<li role="presentation"><a href="#">°úÇÐ/IT</a></li>
-	<li role="presentation"><a href="#">Á¤Ä¡</a></li>
-	<li role="presentation"><a href="#">»çÈ¸</a></li>
+	<li role="presentation" class="active"><a href="#">ì „ì²´</a></li>
+	<li role="presentation"><a href="#">ë¬¸í™”</a></li>
+	<li role="presentation"><a href="#">ê²½ì œ</a></li>
+	<li role="presentation"><a href="#">êµ­ì œ</a></li>
+	<li role="presentation"><a href="#">ê³¼í•™/IT</a></li>
+	<li role="presentation"><a href="#">ì •ì¹˜</a></li>
+	<li role="presentation"><a href="#">ì‚¬íšŒ</a></li>
 </ul>
 <br>
 
@@ -21,10 +21,10 @@
 			</div>
 			<div class="panel-body">
 				<p>
-					¸®Æ÷ÅÍ : ¼­Çö¹è <br /> ÀÛ¼ºÀÏ½Ã : 2016-10-11 11:20:11<br /> ¼öÁ¤ÀÏ½Ã :
-					2016-10-11 12:20:13<br /> Å°¿öµå : #°£Àå°ÔÀå #¾ç³ä°ÔÀå #ºÒ´ßººÀ½¸é
+					ë¦¬í¬í„° : ì„œí˜„ë°° <br /> ìž‘ì„±ì¼ì‹œ : 2016-10-11 11:20:11<br /> ìˆ˜ì •ì¼ì‹œ :
+					2016-10-11 12:20:13<br /> í‚¤ì›Œë“œ : #ê°„ìž¥ê²Œìž¥ #ì–‘ë…ê²Œìž¥ #ë¶ˆë‹­ë³¶ìŒë©´
 				</p>
-				³»¿ë
+				ë‚´ìš©
 			</div>
 		</div>
 	</div>
@@ -36,10 +36,10 @@
 			</div>
 			<div class="panel-body">
 				<p>
-					¸®Æ÷ÅÍ : ¼­Çö¹è <br /> ÀÛ¼ºÀÏ½Ã : 2016-10-11 11:20:11<br /> ¼öÁ¤ÀÏ½Ã :
-					2016-10-11 12:20:13<br /> Å°¿öµå : #°£Àå°ÔÀå #¾ç³ä°ÔÀå #ºÒ´ßººÀ½¸é
+					ë¦¬í¬í„° : ì„œí˜„ë°° <br /> ìž‘ì„±ì¼ì‹œ : 2016-10-11 11:20:11<br /> ìˆ˜ì •ì¼ì‹œ :
+					2016-10-11 12:20:13<br /> í‚¤ì›Œë“œ : #ê°„ìž¥ê²Œìž¥ #ì–‘ë…ê²Œìž¥ #ë¶ˆë‹­ë³¶ìŒë©´
 				</p>
-				³»¿ë
+				ë‚´ìš©
 			</div>
 		</div>
 	</div>
@@ -52,10 +52,10 @@
 			</div>
 			<div class="panel-body">
 				<p>
-					¸®Æ÷ÅÍ : ¼­Çö¹è <br /> ÀÛ¼ºÀÏ½Ã : 2016-10-11 11:20:11<br /> ¼öÁ¤ÀÏ½Ã :
-					2016-10-11 12:20:13<br /> Å°¿öµå : #°£Àå°ÔÀå #¾ç³ä°ÔÀå #ºÒ´ßººÀ½¸é
+					ë¦¬í¬í„° : ì„œí˜„ë°° <br /> ìž‘ì„±ì¼ì‹œ : 2016-10-11 11:20:11<br /> ìˆ˜ì •ì¼ì‹œ :
+					2016-10-11 12:20:13<br /> í‚¤ì›Œë“œ : #ê°„ìž¥ê²Œìž¥ #ì–‘ë…ê²Œìž¥ #ë¶ˆë‹­ë³¶ìŒë©´
 				</p>
-				³»¿ë
+				ë‚´ìš©
 			</div>
 		</div>
 	</div>
@@ -68,10 +68,10 @@
 			</div>
 			<div class="panel-body">
 				<p>
-					¸®Æ÷ÅÍ : ¼­Çö¹è <br /> ÀÛ¼ºÀÏ½Ã : 2016-10-11 11:20:11<br /> ¼öÁ¤ÀÏ½Ã :
-					2016-10-11 12:20:13<br /> Å°¿öµå : #°£Àå°ÔÀå #¾ç³ä°ÔÀå #ºÒ´ßººÀ½¸é
+					ë¦¬í¬í„° : ì„œí˜„ë°° <br /> ìž‘ì„±ì¼ì‹œ : 2016-10-11 11:20:11<br /> ìˆ˜ì •ì¼ì‹œ :
+					2016-10-11 12:20:13<br /> í‚¤ì›Œë“œ : #ê°„ìž¥ê²Œìž¥ #ì–‘ë…ê²Œìž¥ #ë¶ˆë‹­ë³¶ìŒë©´
 				</p>
-				³»¿ë
+				ë‚´ìš©
 			</div>
 		</div>
 	</div>

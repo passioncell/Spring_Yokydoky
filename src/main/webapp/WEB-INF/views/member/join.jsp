@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -203,41 +203,41 @@ input:focus {
 	<!-- CONTENT -->
 	<form action="join_submit" method="post">
 		<div class="form-horizontal">
-			<h2>È¸¿ø°¡ÀÔ</h2>
+			<h2>íšŒì›ê°€ìž…</h2>
 			<hr />
 			<div class="form-group">
 				<div class="col-sm-2"></div>
-				<div class="col-sm-2">ÀÌ¸ÞÀÏ(ID)</div>
+				<div class="col-sm-2">ì´ë©”ì¼(ID)</div>
 				<div class="col-sm-6">
 					<input type="email" class="form-control" name="email" id="email"
-						placeholder="ÀÌ¸ÞÀÏ">
+						placeholder="ì´ë©”ì¼">
 				</div>
 				<div class="col-sm-2"></div>
 			</div>
 
 			<div class="form-group">
 				<div class="col-sm-2"></div>
-				<div class="col-sm-2">ºñ¹Ð¹øÈ£</div>
+				<div class="col-sm-2">ë¹„ë°€ë²ˆí˜¸</div>
 				<div class="col-sm-6">
 					<input type="password" class="form-control" name="pw" id="pw"
-						placeholder="ºñ¹Ð¹øÈ£">
+						placeholder="ë¹„ë°€ë²ˆí˜¸">
 				</div>
 				<div class="col-sm-2"></div>
 			</div>
 
 			<div class="form-group">
 				<div class="col-sm-2"></div>
-				<div class="col-sm-2">ÀÌ¸§</div>
+				<div class="col-sm-2">ì´ë¦„</div>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="name" id="name"
-						placeholder="ÀÌ¸§">
+						placeholder="ì´ë¦„">
 				</div>
 				<div class="col-sm-2"></div>
 			</div>
 
 			<div class="form-group">
 				<div class="col-sm-2"></div>
-				<div class="col-sm-2">»ý³â¿ùÀÏ</div>
+				<div class="col-sm-2">ìƒë…„ì›”ì¼</div>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="birthday"
 						id="birthday" placeholder="1991-04-10">
@@ -248,9 +248,9 @@ input:focus {
 
 			<div class="form-group">
 				<div class="col-sm-2"></div>
-				<div class="col-sm-2">¼ºº°</div>
+				<div class="col-sm-2">ì„±ë³„</div>
 				<div class="col-sm-6">
-					³²¼º<input type="radio" value="Male" name="sex" id="sex"> ¿©¼º<input
+					ë‚¨ì„±<input type="radio" value="Male" name="sex" id="sex"> ì—¬ì„±<input
 						type="radio" value="Female" name="sex" id="sex">
 				</div>
 				<div class="col-sm-2"></div>
@@ -260,7 +260,7 @@ input:focus {
 			<br>
 
 			<div class="form-group">
-				<input type="submit" value="È¸¿ø°¡ÀÔ" class="btn btn-primary" />
+				<input type="submit" value="íšŒì›ê°€ìž…" class="btn btn-primary" />
 			</div>
 		</div>
 	</form>
