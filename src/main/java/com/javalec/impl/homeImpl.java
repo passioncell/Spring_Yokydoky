@@ -1,5 +1,6 @@
 package com.javalec.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.JsonObject;
 import com.javalec.Dao.ArticleDao;
 import com.javalec.Dao.KeywordDao;
 import com.javalec.Dao.MemberDao;
@@ -64,16 +66,19 @@ public class homeImpl implements HomeController {
 		map.put("userEmail", session.getAttribute("userEmail"));
 		
 		List<Object> keywordList = keywordDao.getKeywordList();
-		System.out.println(keywordList);
-//		Map<String, Object> articleListMap = articleDao.getArticleList(map);
 		ModelAndView mav = new ModelAndView("keyword/setting");
-//		mav.addObject("articleListMap", articleListMap);
+		
+		List<Object> jsonList = new ArrayList<Object>();
+		String rowString = null;
+		for(int i = 0; i<keywordList.size(); i++){
+			String[] tmp = keywordList.get(i).toString().split("value=");
+			rowString = "{data:'',"+"value: '" + tmp[1].replace("}", "'}");
+			jsonList.add(rowString);
+		}
 		
 		mav.addObject("map", map);
-		mav.addObject("keywordList", keywordList);
-//		JSONObject responseDetailsJson = new JSONObject();
-//		System.out.println(articleListMap);
-		
+		mav.addObject("keywordList", jsonList);
+
 		return mav;
 	}
 

@@ -10,40 +10,15 @@
 </style>
 
 <script>
-	var keywordList = "${keywordList}";
-	var countries = [
-		   { value: 'Andorra', data: 'AD' },
-		   // ...
-		   { value: 'Zimbabwe', data: 'ZZ' }
-		];
+// https://www.devbridge.com/sourcery/components/jquery-autocomplete/
+	var keywordList = ${keywordList};
 	$(function(){
 	    $( "#search" ).autocomplete({
 	    	lookup:keywordList,
+	    	lookupLimit : 5,
 	        onSelect: function (suggestion) {
 	            alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
-	        }
-
-// 	        source : function( request, response ) {
-// 	             $.ajax({
-// 	                    type: 'POST',
-// 	                    serviceUrl: "${pageContext.request.contextPath}/keyword/searchToJSON",
-// 	                    dataType: "json",
-	            
-// 	                    data: { value : request.term },
-// 	                    success: function(data) {
-// 	                        alert("ddd");
-// 	                        response( 
-// 	                            $.map(data, function(item) {
-// 	                                return {
-// 	                                    label: item.data,
-// 	                                    value: item.data
-// 	                                }
-// 	                            })
-// 	                        );
-// 	                    }
-// 	               });
-// 	            },
-	       
+	        }      
 	    });
 	})
 
