@@ -32,9 +32,20 @@
 	rel='stylesheet' type='text/css'>
 
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<<<<<<< HEAD
 <script
 	src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	
+=======
+
+	<!-- jQuery -->
+<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script type="text/javascript" src="http://www.html.am/html-editors/ckeditor/ckeditor_3.4/ckeditor.js"></script>
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery/jquery.autocomplete.js"/></script> --%>
+
+
+>>>>>>> c7ae606552e377a36e93bcf377cb5ec7ad9bfedb
 </head>
 
 <body>

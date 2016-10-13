@@ -34,9 +34,7 @@
 	</div>
 	</footer>
 
-	<!-- jQuery -->
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
+
 
 	<!-- Bootstrap Core JavaScript -->
 	<script
