@@ -22,18 +22,20 @@ import com.javalec.function.Function;
 public class homeImpl implements HomeController {
 
 	@Autowired
-	Function func;
+	private Function func;
 
 	@Autowired
-	MemberDao memberDao;
+	private MemberDao memberDao;
 	
 	@Autowired
-	ArticleDao articleDao;
+	private ArticleDao articleDao;
 	
 	@Autowired
-	KeywordDao keywordDao;
+	private KeywordDao keywordDao;
+	
+	private int maxrow = 8;
 
-	// ������
+	//생성자
 	public homeImpl() {
 	}
 
@@ -50,8 +52,32 @@ public class homeImpl implements HomeController {
 	public ModelAndView article_list(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("Welcom article_list");
+		Map<String, Object> map = func.parseMap(request);
+		
+		String page = "1";
+		int start = 1 ;
+		int end = 8 ;
+		
+		//전체 기사의 수
+		int totalCount = articleDao.getArticleListCount(map);
+		System.out.println(map);
+		//첫번째 페이지가 아니라면,
+		if (map.get("page") != null && !(map.get("page").equals("")) ){
+			page = request.getParameter("page");
+			start = (Integer.parseInt(page)-1) * maxrow + 1;
+			end = start + maxrow -1;
+		}
+		
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<Map<String, Object>> articleList = articleDao.getArticleList(map);
+		
 		ModelAndView mav = new ModelAndView("article/list");
-
+		mav.addObject("articleList", articleList);
+		mav.addObject("page", page);
+		mav.addObject("totalCount", totalCount);
+		
 		return mav;
 	}
 
@@ -65,14 +91,13 @@ public class homeImpl implements HomeController {
 		map.put("selectedCategory", request.getAttribute("selectedCategory"));
 		map.put("userEmail", session.getAttribute("userEmail"));
 		
-		List<Object> keywordList = keywordDao.getKeywordList();
+		List<Map<String, Object>> keywordList = keywordDao.getKeywordList();
 		ModelAndView mav = new ModelAndView("keyword/setting");
 		
 		List<Object> jsonList = new ArrayList<Object>();
 		String rowString = null;
 		for(int i = 0; i<keywordList.size(); i++){
-			String[] tmp = keywordList.get(i).toString().split("value=");
-			rowString = "{data:'',"+"value: '" + tmp[1].replace("}", "'}");
+			rowString = "{data:'',"+"value: '" + keywordList.get(i).get("value") +"'}";
 			jsonList.add(rowString);
 		}
 		

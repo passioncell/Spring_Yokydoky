@@ -16,7 +16,7 @@ public abstract interface HomeController {
 	public abstract ModelAndView index(HttpServletRequest request, HttpSession session) throws Exception;
 
 	// 요약기사
-	@RequestMapping("/article/list/{selectedCategory}")
+	@RequestMapping("/article/list")
 	public abstract ModelAndView article_list(HttpServletRequest request, HttpSession session) throws Exception;
 
 	// 키워드 설정

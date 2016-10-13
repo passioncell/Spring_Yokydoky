@@ -4,8 +4,34 @@
 <mapper namespace="articleDao">
 	
 	<!-- 기사 목록 가져오기 -->
-	<select id="getArticleList" parameterType="Map" statementType="CALLABLE">
-		SELECT * FROM ARTICLE WHERE FK_ArticleCategory = #{selectedCategory}
+	<select id="getArticleList" resultType="Map" parameterType="Map" statementType="CALLABLE">
+		<choose>
+			<when test = "selectedCategory == '' or selectedCategory == null">
+				SELECT * FROM
+				(
+					SELECT ROW_NUMBER() OVER (ORDER BY write_date) AS no, id, title, content, reporter, write_date, modify_date, keyword, like_count, FK_ArticleCategory
+					FROM ARTICLE
+				) a WHERE a.no BETWEEN #{start} AND #{end}
+			</when>
+			<otherwise>
+				SELECT * FROM
+				(
+					SELECT ROW_NUMBER() OVER (ORDER BY write_date) AS no, id, title, content, reporter, write_date, modify_date, keyword, like_count, FK_ArticleCategory
+					FROM ARTICLE
+				) a (WHERE a.no BETWEEN #{start} AND #{end}) AND FK_ArticleCategory = #{selectedCategory} 
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="getArticleListCount" resultType="int" parameterType="Map" statementType="CALLABLE">
+		<choose>
+			<when test = "selectedCategory == '' or selectedCategory == null">
+				SELECT COUNT(*) FROM ARTICLE
+			</when>
+			<otherwise>
+				SELECT COUNT(*) FROM ARTICLE WHERE FK_ArticleCategory = #{selectedCategory}
+			</otherwise>
+		</choose>
 	</select>
 	
 </mapper>
