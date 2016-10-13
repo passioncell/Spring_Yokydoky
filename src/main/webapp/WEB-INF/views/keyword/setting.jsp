@@ -10,35 +10,44 @@
 </style>
 
 <script>
+	var keywordList = "${keywordList}";
+	var countries = [
+		   { value: 'Andorra', data: 'AD' },
+		   // ...
+		   { value: 'Zimbabwe', data: 'ZZ' }
+		];
 	$(function(){
 	    $( "#search" ).autocomplete({
-	        source : function( request, response ) {
-	             $.ajax({
-	                    type: 'POST',
-	                    url: "/keyword/searchToJSON",
-	                    dataType: "json",
-	            
-	                    data: { value : request.term },
-	                    success: function(data) {
-	                        
-	                        response( 
-	                            $.map(data, function(item) {
-	                                return {
-	                                    label: item.data,
-	                                    value: item.data
-	                                }
-	                            })
-	                        );
-	                    }
-	               });
-	            },
-	       
-	        minLength: 2,
-	        select: function( event, ui ) {
-	            
+	    	lookup:keywordList,
+	        onSelect: function (suggestion) {
+	            alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
 	        }
+
+// 	        source : function( request, response ) {
+// 	             $.ajax({
+// 	                    type: 'POST',
+// 	                    serviceUrl: "${pageContext.request.contextPath}/keyword/searchToJSON",
+// 	                    dataType: "json",
+	            
+// 	                    data: { value : request.term },
+// 	                    success: function(data) {
+// 	                        alert("ddd");
+// 	                        response( 
+// 	                            $.map(data, function(item) {
+// 	                                return {
+// 	                                    label: item.data,
+// 	                                    value: item.data
+// 	                                }
+// 	                            })
+// 	                        );
+// 	                    }
+// 	               });
+// 	            },
+	       
 	    });
 	})
+
+
 </script>
 
 <h2>나만의 키워드를 추가해보세요!</h2>

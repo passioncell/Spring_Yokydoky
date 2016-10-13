@@ -1,6 +1,6 @@
 package com.javalec.impl;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.javalec.Dao.ArticleDao;
+import com.javalec.Dao.KeywordDao;
 import com.javalec.Dao.MemberDao;
 import com.javalec.controller.HomeController;
 import com.javalec.function.Function;
@@ -26,6 +27,9 @@ public class homeImpl implements HomeController {
 	
 	@Autowired
 	ArticleDao articleDao;
+	
+	@Autowired
+	KeywordDao keywordDao;
 
 	// ������
 	public homeImpl() {
@@ -55,15 +59,20 @@ public class homeImpl implements HomeController {
 		System.out.println("Welcom keyword_setting");
 		System.out.println("selectedCategory = " + request.getAttribute("selectedCategory"));
 		
-		Map<String, Object> requestMap = func.parseMap(request);
-		requestMap.put("selectedCategory", request.getAttribute("selectedCategory"));
-		requestMap.put("userEmail", session.getAttribute("userEmail"));
+		Map<String, Object> map = func.parseMap(request);
+		map.put("selectedCategory", request.getAttribute("selectedCategory"));
+		map.put("userEmail", session.getAttribute("userEmail"));
 		
-		Map<String, Object> articleListMap = articleDao.getArticleList(requestMap);
-		ModelAndView mav = new ModelAndView("article/list");
-		mav.addObject("articleListMap", articleListMap);
+		List<Object> keywordList = keywordDao.getKeywordList();
+		System.out.println(keywordList);
+//		Map<String, Object> articleListMap = articleDao.getArticleList(map);
+		ModelAndView mav = new ModelAndView("keyword/setting");
+//		mav.addObject("articleListMap", articleListMap);
 		
-		System.out.println(articleListMap);
+		mav.addObject("map", map);
+		mav.addObject("keywordList", keywordList);
+//		JSONObject responseDetailsJson = new JSONObject();
+//		System.out.println(articleListMap);
 		
 		return mav;
 	}
@@ -171,16 +180,12 @@ public class homeImpl implements HomeController {
 		return new ModelAndView("member/login");
 	}
 
-<<<<<<< HEAD
-=======
+
 	@Override
 	public ModelAndView searchToJSON(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("Welcom searchToJSON");
 		return null;
 	}
-
-	
->>>>>>> c7ae606552e377a36e93bcf377cb5ec7ad9bfedb
 
 }
