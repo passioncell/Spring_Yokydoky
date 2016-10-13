@@ -8,4 +8,21 @@
 		SELECT * FROM SearchKeywordModel
 	</select>
 	
+	<insert id="insertKeyword" parameterType="Map" statementType="CALLABLE">
+		INSERT INTO MemberKeyword 
+			SELECT m.id as FK_Member, k.id as FK_SearchKeywordModel 
+			FROM Member as m, SearchKeywordModel as k 
+			WHERE email = #{email} and keyword = #{keyword}					
+	</insert>
+	
+	<select id="getMyKeyword" resultType="Map" statementType="CALLABLE">
+		  SELECT sk.keyword 
+			FROM MemberKeyword as mk 
+			INNER JOIN Member as m 
+			ON mk.FK_Member = m.id 
+			INNER JOIN SearchKeywordModel as sk
+			ON sk.id = mk.FK_SearchKeywordModel
+			WHERE m.email = #{email}
+	</select>
+	
 </mapper>

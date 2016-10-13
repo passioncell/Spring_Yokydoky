@@ -85,25 +85,54 @@ public class homeImpl implements HomeController {
 	public ModelAndView keyword_setting(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("Welcom keyword_setting");
-		System.out.println("selectedCategory = " + request.getAttribute("selectedCategory"));
 		
 		Map<String, Object> map = func.parseMap(request);
 		map.put("selectedCategory", request.getAttribute("selectedCategory"));
-		map.put("userEmail", session.getAttribute("userEmail"));
+		map.put("email", session.getAttribute("userEmail"));
 		
 		List<Map<String, Object>> keywordList = keywordDao.getKeywordList();
 		ModelAndView mav = new ModelAndView("keyword/setting");
 		
+		//검색어 리스트 생성
 		List<Object> jsonList = new ArrayList<Object>();
 		String rowString = null;
 		for(int i = 0; i<keywordList.size(); i++){
-			rowString = "{data:'',"+"value: '" + keywordList.get(i).get("value") +"'}";
+			rowString = "{data:'',"+"value: '" + keywordList.get(i).get("keyword") +"'}";
 			jsonList.add(rowString);
+		}
+		
+		//기존에 추가된 키워드는 삭제
+		List<Map<String, Object>> myKeyword = keywordDao.getMyKeyword(map);
+		for(int i = 0; i<myKeyword.size(); i++){
+			for(int j =0; j<jsonList.size(); j++){
+				String tmp[] = jsonList.get(j).toString().split("value: '");
+				tmp[1] =tmp[1].replace("'}", "");
+				if(tmp[1].equals(myKeyword.get(i).get("keyword").toString())){
+					jsonList.remove(j);
+				}
+			}
 		}
 		
 		mav.addObject("map", map);
 		mav.addObject("keywordList", jsonList);
-
+		mav.addObject("myKeyword",myKeyword);
+		
+		System.out.println(myKeyword);
+		return mav;
+	}
+	
+	//나만의 키워드 추가
+	@Override
+	public ModelAndView insertKeyword(HttpServletRequest request, HttpSession session) throws Exception {
+		// TODO Auto-generated method stub
+		String userEmail = (String) session.getAttribute("userEmail");
+		Map<String, Object> map = func.parseMap(request);
+		map.put("email", userEmail);
+		
+		keywordDao.insertKeyword(map);;
+		
+		ModelAndView mav = new ModelAndView("share/alert");
+		mav.addObject("key", "키워드 추가");
 		return mav;
 	}
 
@@ -209,13 +238,4 @@ public class homeImpl implements HomeController {
 
 		return new ModelAndView("member/login");
 	}
-
-
-	@Override
-	public ModelAndView searchToJSON(HttpServletRequest request, HttpSession session) throws Exception {
-		// TODO Auto-generated method stub
-		System.out.println("Welcom searchToJSON");
-		return null;
-	}
-
 }

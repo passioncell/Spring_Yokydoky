@@ -22,6 +22,10 @@ public abstract interface HomeController {
 	// 키워드 설정
 	@RequestMapping("/keyword/setting")
 	public abstract ModelAndView keyword_setting(HttpServletRequest request, HttpSession session) throws Exception;
+	
+	// 키워드 설정
+	@RequestMapping("/keyword/insertKeyword")
+	public abstract ModelAndView insertKeyword(HttpServletRequest request, HttpSession session) throws Exception;
 
 	// 내정보 변경
 	@RequestMapping("/member/modify")
@@ -45,10 +49,6 @@ public abstract interface HomeController {
 	
 	@RequestMapping("/member/logout_submit")
 	ModelAndView member_join_submit(HttpServletRequest request, HttpSession session) throws Exception;
-
-	// ȸ������(SUBMIT)
-	@RequestMapping("/keyword/searchToJSON")
-	public abstract ModelAndView searchToJSON(HttpServletRequest request, HttpSession session) throws Exception;
 
 	// 로그아웃
 	@RequestMapping("/member/logout")
