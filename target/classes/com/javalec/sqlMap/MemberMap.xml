@@ -27,8 +27,14 @@
 		SELECT * FROM MEMBER WHERE email = #{email}
 	</select>
 	
+	<!-- 내정보 수정 -->
 	<update id="updateMemberInfo" parameterType="Map" statementType="CALLABLE">
 		UPDATE MEMBER set password = #{password}, name = #{name}, birthday = #{birthday}, sex = #{sex} where email = #{email}
 	</update>
+	
+	<!-- 기사 목록 가져오기 -->
+	<select id="getArticleList" parameterType="Map" statementType="CALLABLE">
+		SELECT * FROM ARTICLE WHERE FK_ArticleCategory = #{selectedCategory}
+	</select>
 	
 </mapper>

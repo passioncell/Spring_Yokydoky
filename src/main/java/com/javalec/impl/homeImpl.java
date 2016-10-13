@@ -1,7 +1,6 @@
 package com.javalec.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.javalec.Dao.ArticleDao;
 import com.javalec.Dao.MemberDao;
 import com.javalec.controller.HomeController;
 import com.javalec.function.Function;
@@ -23,6 +23,9 @@ public class homeImpl implements HomeController {
 
 	@Autowired
 	MemberDao memberDao;
+	
+	@Autowired
+	ArticleDao articleDao;
 
 	// ������
 	public homeImpl() {
@@ -50,8 +53,18 @@ public class homeImpl implements HomeController {
 	public ModelAndView keyword_setting(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("Welcom keyword_setting");
-		ModelAndView mav = new ModelAndView("keyword/setting");
-
+		System.out.println("selectedCategory = " + request.getAttribute("selectedCategory"));
+		
+		Map<String, Object> requestMap = func.parseMap(request);
+		requestMap.put("selectedCategory", request.getAttribute("selectedCategory"));
+		requestMap.put("userEmail", session.getAttribute("userEmail"));
+		
+		Map<String, Object> articleListMap = articleDao.getArticleList(requestMap);
+		ModelAndView mav = new ModelAndView("article/list");
+		mav.addObject("articleListMap", articleListMap);
+		
+		System.out.println(articleListMap);
+		
 		return mav;
 	}
 
@@ -59,16 +72,16 @@ public class homeImpl implements HomeController {
 	public ModelAndView member_modify(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("Welcom member_modify");
-		
-		String userEmail = (String)session.getAttribute("userEmail");
+
+		String userEmail = (String) session.getAttribute("userEmail");
 		Map<String, Object> userInfoMap = memberDao.getMyInfo(userEmail);
-		
+
 		ModelAndView mav = new ModelAndView("member/modify");
-//		mav.addObject("userInfoMap", userInfoMap);
-		
+		mav.addObject("userInfoMap", userInfoMap);
+
 		return mav;
 	}
-	
+
 	@Override
 	public ModelAndView member_modify_submit(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
@@ -76,7 +89,7 @@ public class homeImpl implements HomeController {
 		Map<String, Object> map = func.parseMap(request);
 		System.out.println(map);
 		memberDao.updateMemberInfo(map);
-			
+
 		ModelAndView mav = new ModelAndView("share/alert");
 		mav.addObject("key", "수정완료");
 		return mav;
@@ -95,7 +108,7 @@ public class homeImpl implements HomeController {
 	public ModelAndView member_join(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("Welcom member_join");
-		
+
 		ModelAndView mav = new ModelAndView("member/join");
 
 		return mav;
@@ -105,7 +118,7 @@ public class homeImpl implements HomeController {
 	public ModelAndView member_join_submit(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("Welcom member_join_submit");
-		
+
 		ModelAndView mav = new ModelAndView("member/login");
 		Map<String, Object> map = func.parseMap(request);
 
@@ -126,10 +139,10 @@ public class homeImpl implements HomeController {
 	public ModelAndView member_login_submit(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("Welcom member_login_submit");
-		
+
 		Map<String, Object> map = func.parseMap(request);
 
-		// ���̵� & ��й�ȣ üũ
+		// 로그인 검사
 		int count = memberDao.checkLogin(map);
 
 		if (count == 0) {
@@ -137,11 +150,10 @@ public class homeImpl implements HomeController {
 		}
 
 		// �α��� ����ó��
-		
+
 		session.setAttribute("isLogin", "true");
 		session.setAttribute("userEmail", map.get("email"));
-		System.out
-				.println("��������  : userEmail : " + map.get("email") + "  isLogin : " + session.getAttribute("isLogin"));
+		System.out.println("세션저장 : userEmail : " + map.get("email") + "  isLogin : " + session.getAttribute("isLogin"));
 
 		ModelAndView mav = new ModelAndView("index");
 		mav.addObject("isLogin", true);
@@ -152,13 +164,12 @@ public class homeImpl implements HomeController {
 	public ModelAndView member_logout(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("Welcom member_logout");
-		
+
 		session.setAttribute("isLogin", null);
 		session.setAttribute("userEmail", null);
 
 		return new ModelAndView("member/login");
 	}
 
-	
 
 }

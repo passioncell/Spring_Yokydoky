@@ -13,44 +13,45 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public abstract interface HomeController {
 
-	// ¸ŞÀÎ
+	// ì²«í™”ë©´
 	@RequestMapping("/")
 	public abstract ModelAndView index(HttpServletRequest request, HttpSession session) throws Exception;
 
-	// ½Å¹®±â»ç ¸®½ºÆ®
-	@RequestMapping("/article/list")
+	// ìš”ì•½ê¸°ì‚¬
+	@RequestMapping("/article/list/{selectedCategory}")
 	public abstract ModelAndView article_list(HttpServletRequest request, HttpSession session) throws Exception;
 
-	// Å°¿öµå ¼³Á¤
+	// í‚¤ì›Œë“œ ì„¤ì •
 	@RequestMapping("/keyword/setting")
 	public abstract ModelAndView keyword_setting(HttpServletRequest request, HttpSession session) throws Exception;
 
-	// ³»Á¤º¸ º¯°æ
+	// ë‚´ì •ë³´ ë³€ê²½
 	@RequestMapping("/member/modify")
 	public abstract ModelAndView member_modify(HttpServletRequest request, HttpSession session) throws Exception;
-	
-	// ³»Á¤º¸ º¯°æ
+
+	// ë‚´ì •ë³´ ìˆ˜ì •
 	@RequestMapping("/member/modify_submit")
 	public abstract ModelAndView member_modify_submit(HttpServletRequest request, HttpSession session) throws Exception;
 
-	// ·Î±×ÀÎ(VIEW)
+	// ë¡œê·¸ì¸(VIEW)
 	@RequestMapping("/member/login")
 	public abstract ModelAndView member_login(HttpServletRequest request, HttpSession session) throws Exception;
 
-	// ·Î±×ÀÎ(SUBMIT)
+	// ë¡œê·¸ì¸(SUBMIT)
 	@RequestMapping("/member/login_submit")
 	public abstract ModelAndView member_login_submit(HttpServletRequest request, HttpSession session) throws Exception;
 
-	// È¸¿ø°¡ÀÔ(VIEW)
+	// íšŒì›ê°€ì…(VIEW)
 	@RequestMapping("/member/join")
 	public abstract ModelAndView member_join(HttpServletRequest request, HttpSession session) throws Exception;
 
-	// È¸¿ø°¡ÀÔ(SUBMIT)
+	// íšŒì›ê°€ì…(SUBMIT)
 	@RequestMapping("/member/join_submit")
 	public abstract ModelAndView member_join_submit(HttpServletRequest request, HttpSession session) throws Exception;
 
-	// ·Î±×¾Æ¿ô
+	// ë¡œê·¸ì•„ì›ƒ
 	@RequestMapping("/member/logout")
 	public abstract ModelAndView member_logout(HttpServletRequest request, HttpSession session) throws Exception;
 
+	
 }

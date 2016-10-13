@@ -32,7 +32,7 @@
 			<div class="col-sm-2"></div>
 			<div class="col-sm-2">이름</div>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" id="name" name="name">
+				<input type="text" class="form-control" id="name" name="name" value="${userInfoMap.name}">
 			</div>
 			<div class="col-sm-2"></div>
 		</div>
@@ -41,7 +41,7 @@
 			<div class="col-sm-2"></div>
 			<div class="col-sm-2">생년월일</div>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" id="birthday" name="birthday">
+				<input type="text" class="form-control" id="birthday" name="birthday" value="${userInfoMap.birthday}">
 			</div>
 			<div class="col-sm-2"></div>
 		</div>
@@ -51,9 +51,17 @@
 			<div class="col-sm-2"></div>
 			<div class="col-sm-2">성별</div>
 			<div class="col-sm-3">
-				남성 : <input type="radio" class="form-control" id="sex" name="sex" value="male">
-				
-				여성 : <input type="radio" class="form-control" id="sex" name="sex" value="female">
+
+				남성 : <input type="radio" class="form-control" id="sex" name="sex" value="male" 
+				<c:if test="${userInfoMap.sex eq 'male' }">
+					checked="checked"
+				</c:if>
+				>
+				여성 : <input type="radio" class="form-control" id="sex" name="sex" value="female" 
+				<c:if test="${userInfoMap.sex eq 'female' }">
+					checked="checked"
+				</c:if>
+				>
 			</div>
 			<div class="col-sm-2"></div>
 		</div>
