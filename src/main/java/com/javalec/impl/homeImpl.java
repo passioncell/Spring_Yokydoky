@@ -73,6 +73,7 @@ public class homeImpl implements HomeController {
 		
 		List<Map<String, Object>> articleList = articleDao.getArticleList(map);
 		
+		System.out.println(articleList);
 		ModelAndView mav = new ModelAndView("article/list");
 		mav.addObject("articleList", articleList);
 		mav.addObject("page", page);
