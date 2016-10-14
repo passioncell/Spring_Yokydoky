@@ -69,7 +69,7 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="${pageContext.request.contextPath}/">처음으로</a></li>
-				<li><a href="${pageContext.request.contextPath}/article/list">요약신문</a>
+				<li><a href="${pageContext.request.contextPath}/article/list?selectedCategory=0&page=1">요약신문</a>
 				</li>
 				<li><a href="${pageContext.request.contextPath}/keyword/setting">키워드설정</a></li>
 				<li><a href="${pageContext.request.contextPath}/member/modify">내정보</a></li>

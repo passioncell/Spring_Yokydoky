@@ -58,6 +58,14 @@ public class homeImpl implements HomeController {
 		int start = 1 ;
 		int end = 8 ;
 		
+		//유저가 선택한 카테고리가 있다면 초기화(페이지 이동에선 이값이 없음.
+		if(map.get("selectedCategory") != null){
+			int selectedCategory = Integer.parseInt(map.get("selectedCategory").toString());
+			map.put("selectedCategory", selectedCategory);
+			System.out.println("selectedCategory를 싣다.");
+		}
+		
+		
 		//전체 기사의 수
 		int totalCount = articleDao.getArticleListCount(map);
 		System.out.println(map);
@@ -70,6 +78,12 @@ public class homeImpl implements HomeController {
 		
 		map.put("start", start);
 		map.put("end", end);
+		
+		System.out.println("점검이다 시바 start = " + map.get("start").toString() +
+				"end = " + map.get("end").toString() + 
+				"page = " + map.get("page").toString() +
+				"selectedCategory" + map.get("selectedCategory").toString());
+		
 		
 		List<Map<String, Object>> articleList = articleDao.getArticleList(map);
 		
