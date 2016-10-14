@@ -33,7 +33,7 @@
 	<c:if test = "${key eq '키워드 추가'}">
 		<script>
 			alert("키워드가 추가되었습니다.");
-		    history.go(-1);
+			location.href="${pageContext.request.contextPath}/keyword/setting";
 		</script>
 	</c:if>
 
