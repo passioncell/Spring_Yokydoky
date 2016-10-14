@@ -4,12 +4,12 @@
 <ul class="nav nav-pills" role="tablist">
 <!-- 	active 부분 현재 카테고리로 활성화되게 -->
 	<li role="presentation" class="active"><a href="#">전체</a></li>
-	<li role="presentation"><a href="javascript:loadPage('1');">문화</a></li>
-	<li role="presentation"><a href="javascript:loadPage('2');">경제</a></li>
-	<li role="presentation"><a href="javascript:loadPage('3');">국제</a></li>
-	<li role="presentation"><a href="javascript:loadPage('4');">과학/IT</a></li>
-	<li role="presentation"><a href="javascript:loadPage('5');">정치</a></li>
-	<li role="presentation"><a href="javascript:loadPage('6');">사회</a></li>
+	<li role="presentation"><a href="javascript:moveCategory('1');">문화</a></li>
+	<li role="presentation"><a href="javascript:moveCategory('2');">경제</a></li>
+	<li role="presentation"><a href="javascript:moveCategory('3');">국제</a></li>
+	<li role="presentation"><a href="javascript:moveCategory('4');">과학/IT</a></li>
+	<li role="presentation"><a href="javascript:moveCategory('5');">정치</a></li>
+	<li role="presentation"><a href="javascript:moveCategory('6');">사회</a></li>
 </ul>
 <br>
 <!-- moveCategory -->
@@ -100,27 +100,24 @@
 	</div>
 </div>
 
-<form method = "POST" id ="pagingForm" action = "${pageContext.request.contextPath}/article/list">
-	<input type="hidden" name="map" value="${map}">
+<form method = "GET" id ="pagingForm" action = "${pageContext.request.contextPath}/article/list">
 	<input type="hidden" name="page" value="">
-	<input type="hidden" name="totalCount" value="totalCount">
-
-</form>  
-
-<form method = "POST" id ="catrgotForm" action = "${pageContext.request.contextPath}/article/list">
 	<input type="hidden" name="selectedCategory" value="">
 </form>  
 
 <script>
+	
 	function loadPage(page){
 // 		map 하고 현재 입력한 page를 서버로 전달
 		pagingForm.page.value = page;
+		pagingForm.selectedCategory.value = ${selectedCategory};
 		pagingForm.submit();
 	}
 	
 	function moveCategory(selectedCategory){
 // 		map 하고 현재 입력한 page를 서버로 전달
 		pagingForm.selectedCategory.value = selectedCategory;
+		pagingForm.page.value = 1;
 		pagingForm.submit();
 	}
 </script>
