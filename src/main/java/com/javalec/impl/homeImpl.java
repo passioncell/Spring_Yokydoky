@@ -68,7 +68,7 @@ public class homeImpl implements HomeController {
 		
 		//전체 기사의 수
 		int totalCount = articleDao.getArticleListCount(map);
-		System.out.println(map);
+		
 		//첫번째 페이지가 아니라면,
 		if (map.get("page") != null && !(map.get("page").equals("")) ){
 			page = request.getParameter("page");

@@ -106,7 +106,6 @@
 </form>  
 
 <script>
-	
 	function loadPage(page){
 // 		map 하고 현재 입력한 page를 서버로 전달
 		pagingForm.page.value = page;
