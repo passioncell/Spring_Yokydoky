@@ -23,8 +23,8 @@ public class MemberDao extends SqlSessionDaoSupport{
 		return (Integer) getSqlSession().selectOne("memberDao.checkLogin", map);
 	}
 	
-	public Map<String, Object> getMyInfo(String eamil){
-		return  (Map<String, Object>) getSqlSession().selectList("memberDao.getMyInfo", eamil);
+	public ArrayList<Map<String, Object>> getMyInfo(String eamil){
+		return  (ArrayList<Map<String, Object>>) getSqlSession().selectList("memberDao.getMyInfo", eamil);
 	}
 	
 	public void updateMemberInfo(Map map){

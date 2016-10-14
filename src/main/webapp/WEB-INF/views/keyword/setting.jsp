@@ -57,7 +57,7 @@
 
 	<div class="row" style = "height : 50px">
 		<c:forEach var ="item" begin = "1" end = "5" items="${myKeyword}" varStatus="status">
-			<span class="label label-primary">${myKeyword[5*(i-1)+status.index-1]}</span>
+			<span class="label label-primary">${myKeyword[5*(i-1)+status.index-1].keyword}</span>
 		</c:forEach>
 	</div>
 </c:forEach>

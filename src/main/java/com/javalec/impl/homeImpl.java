@@ -142,10 +142,11 @@ public class homeImpl implements HomeController {
 		System.out.println("Welcom member_modify");
 
 		String userEmail = (String) session.getAttribute("userEmail");
-		Map<String, Object> userInfoMap = memberDao.getMyInfo(userEmail);
+		ArrayList<Map<String, Object>> userInfoMap = memberDao.getMyInfo(userEmail);
 
 		ModelAndView mav = new ModelAndView("member/modify");
-		mav.addObject("userInfoMap", userInfoMap);
+
+		mav.addObject("userInfoMap", userInfoMap.get(0));
 
 		return mav;
 	}
