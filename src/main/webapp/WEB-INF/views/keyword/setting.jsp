@@ -63,8 +63,8 @@
 <c:forEach var ="i" begin = "1" end="${fn:length(myKeyword)/5+(1-(fn:length(myKeyword)/5%1))%1}" step="1">
 
 	<div class="row" style = "height : 50px">
-		<c:forEach var ="item" begin = "1" end = "5" items="${myKeyword}" varStatus="status">
-			<span class="label label-primary" onClick="javascript:deleteKeyword($(this).html())">${myKeyword[5*(i-1)+status.index-1].keyword}</span>
+		<c:forEach var ="item" begin = "0" end = "${fn:length(myKeyword)%5+1}" items="${myKeyword}" varStatus="status" step="1">
+			<span class="label label-primary" onClick="javascript:deleteKeyword($(this).html())">${myKeyword[5*(i-1)+status.index].keyword}</span>
 		</c:forEach>
 	</div>
 </c:forEach>

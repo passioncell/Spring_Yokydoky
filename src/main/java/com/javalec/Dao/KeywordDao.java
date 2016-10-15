@@ -19,5 +19,8 @@ public class KeywordDao extends SqlSessionDaoSupport{
 	public List<Map<String, Object>> getMyKeyword(Map map){
 		return  (List<Map<String, Object>>) getSqlSession().selectList("keywordDao.getMyKeyword",map);
 	}
-
+	
+	public void deleteKeyword(Map map){
+		getSqlSession().delete("keywordDao.deleteKeyword",map);
+	}
 }

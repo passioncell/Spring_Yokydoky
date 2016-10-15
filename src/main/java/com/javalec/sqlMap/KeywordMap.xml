@@ -25,4 +25,17 @@
 			WHERE m.email = #{email}
 	</select>
 	
+	<delete id="deleteKeyword" parameterType="Map" statementType="CALLABLE">
+		DELETE FROM MemberKeyword 
+			WHERE FK_Member IN
+				(SELECT id 
+				FROM Member 
+				WHERE email = #{email})
+			AND
+			FK_SearchKeywordModel IN
+				(SELECT id
+				FROM SearchKeywordModel
+				WHERE keyword = #{keyword})
+	
+	</delete>	
 </mapper>

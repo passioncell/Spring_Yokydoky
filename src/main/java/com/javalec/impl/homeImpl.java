@@ -96,8 +96,12 @@ public class homeImpl implements HomeController {
 	@Override
 	public ModelAndView deleteKeyword(HttpServletRequest request, HttpSession session) throws Exception {
 		Map <String, Object> map = func.parseMap(request);
-		System.out.println(map);
-		return null;
+		map.put("email", session.getAttribute("userEmail"));
+		keywordDao.deleteKeyword(map);
+		
+		ModelAndView mav = new ModelAndView("share/alert");
+		mav.addObject("key", "키워드 삭제");
+		return mav;
 	}
 	
 	@Override
