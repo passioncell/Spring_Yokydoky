@@ -26,7 +26,11 @@ public abstract interface HomeController {
 	// 키워드 설정
 	@RequestMapping("/keyword/insertKeyword")
 	public abstract ModelAndView insertKeyword(HttpServletRequest request, HttpSession session) throws Exception;
-
+	
+	//키워드 삭제
+	@RequestMapping("/keyword/deleteKeyword")
+	public abstract ModelAndView deleteKeyword(HttpServletRequest request, HttpSession session) throws Exception;
+	
 	// 내정보 변경
 	@RequestMapping("/member/modify")
 	public abstract ModelAndView member_modify(HttpServletRequest request, HttpSession session) throws Exception;

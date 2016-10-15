@@ -21,10 +21,17 @@
 	        }      
 	    });
 	})
-
+	
+	function deleteKeyword(keyword){
+		location.href="${pageContext.request.contextPath}/keyword/deleteKeyword";
+		deleteForm.keyword.value = keyword;
+		deleteForm.submit();
+	}
 
 </script>
-
+<form method = "POST" id ="deleteForm" action = "${pageContext.request.contextPath}/keyword/deleteKeyword">
+	<input type="hidden" name="keyword" value="">
+</form>  
 <h2>나만의 키워드를 추가해보세요!</h2>
 <br>
 <div class="container" style="margin-top: 5%;">
@@ -57,7 +64,7 @@
 
 	<div class="row" style = "height : 50px">
 		<c:forEach var ="item" begin = "1" end = "5" items="${myKeyword}" varStatus="status">
-			<span class="label label-primary">${myKeyword[5*(i-1)+status.index-1].keyword}</span>
+			<span class="label label-primary" onClick="javascript:deleteKeyword($(this).html())">${myKeyword[5*(i-1)+status.index-1].keyword}</span>
 		</c:forEach>
 	</div>
 </c:forEach>

@@ -92,7 +92,14 @@ public class homeImpl implements HomeController {
 		
 		return mav;
 	}
-
+	
+	@Override
+	public ModelAndView deleteKeyword(HttpServletRequest request, HttpSession session) throws Exception {
+		Map <String, Object> map = func.parseMap(request);
+		System.out.println(map);
+		return null;
+	}
+	
 	@Override
 	public ModelAndView keyword_setting(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
