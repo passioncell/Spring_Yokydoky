@@ -65,7 +65,6 @@ public class homeImpl implements HomeController {
 			
 		}
 		
-		
 		//전체 기사의 수
 		int totalCount = articleDao.getArticleListCount(map);
 		
@@ -83,6 +82,7 @@ public class homeImpl implements HomeController {
 		
 
 		List<Map<String, Object>> articleList = articleDao.getArticleList(map);
+		System.out.println(articleList);
 		
 		ModelAndView mav = new ModelAndView("article/list");
 		mav.addObject("selectedCategory", map.get("selectedCategory"));

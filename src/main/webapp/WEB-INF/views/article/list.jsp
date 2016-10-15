@@ -14,90 +14,43 @@
 <br>
 <!-- moveCategory -->
 <div class="row">
-	<div class="col-sm-6">
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-				Title
-			</div>
-			<div class="panel-body">
-				<p>
-					${articleListMap.get(0).title}
-					리포터 : 서현배 <br /> 작성일시 : 2016-10-11 11:20:11<br /> 수정일시 :
-					2016-10-11 12:20:13<br /> 키워드 : #간장게장 #양념게장 #불닭볶음면
-				</p>
-				내용
-			</div>
-		</div>
-	</div>
-
-	<div class="col-sm-6">
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Title
-			</div>
-			<div class="panel-body">
-				<p>
-					리포터 : 서현배 <br /> 작성일시 : 2016-10-11 11:20:11<br /> 수정일시 :
-					2016-10-11 12:20:13<br /> 키워드 : #간장게장 #양념게장 #불닭볶음면
-				</p>
-				내용
-			</div>
-		</div>
-	</div>
-
-	<div class="col-sm-6">
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-				Title
-			</div>
-			<div class="panel-body">
-				<p>
-					리포터 : 서현배 <br /> 작성일시 : 2016-10-11 11:20:11<br /> 수정일시 :
-					2016-10-11 12:20:13<br /> 키워드 : #간장게장 #양념게장 #불닭볶음면
-				</p>
-				내용
-			</div>
-		</div>
-	</div>
-
-	<div class="col-sm-6">
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-				Title
-			</div>
-			<div class="panel-body">
-				<p>
-					리포터 : 서현배 <br /> 작성일시 : 2016-10-11 11:20:11<br /> 수정일시 :
-					2016-10-11 12:20:13<br /> 키워드 : #간장게장 #양념게장 #불닭볶음면
-				</p>
-				내용
-			</div>
-		</div>
-	</div>
+	<c:forEach items="${articleList}" var="item">
+      <div class="col-sm-6">
+         <div class="panel panel-info">
+            <div class="panel-heading">
+               <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+               ${item["title"]}
+            </div>
+            <div class="panel-body">
+               <p>
+                  리포터 : ${item["reporter"]} <br /> 작성일시 : ${item["write_date"]} <br />
+                  수정일시 : ${item["modify_date"]} <br /> 키워드 : ${item["keyword"]} <br />
+               </p>
+               ${item["content"]}
+            </div>
+         </div>
+      </div>
+	</c:forEach>
+</div>
+<div align="center">
+	<a href="javascript:loadPage('1');">[<<]</a>
+	<a href="javascript:loadPage('${page-1}');">[<]</a>
+	<fmt:parseNumber var="start" value="${page - (page%10)}" integerOnly="true" />
+	<c:forEach var = "i" begin = "${start}" end = "${start + 9}" step = "1">
+		<c:choose>
+			<c:when test = "${i eq 0 }">
+			</c:when>
+			<c:when test = "${page eq i}">
+				&nbsp;<strong><a href="javascript:loadPage('${i}');">${i}</a></strong>&nbsp;
+			</c:when>
+			<c:otherwise>
+				&nbsp;<a href="javascript:loadPage('${i}');">${i}</a>&nbsp;	
+			</c:otherwise>	
+		</c:choose>
+	</c:forEach>
 	
-	<div align="center">
-		<a href="javascript:loadPage('1');">[<<]</a>
-		<a href="javascript:loadPage('${page-1}');">[<]</a>
-		<fmt:parseNumber var="start" value="${page - (page%10)}" integerOnly="true" />
-		<c:forEach var = "i" begin = "${start}" end = "${start + 9}" step = "1">
-			<c:choose>
-				<c:when test = "${i eq 0 }">
-				</c:when>
-				<c:when test = "${page eq i}">
-					&nbsp;<strong><a href="javascript:loadPage('${i}');">${i}</a></strong>&nbsp;
-				</c:when>
-				<c:otherwise>
-					&nbsp;<a href="javascript:loadPage('${i}');">${i}</a>&nbsp;	
-				</c:otherwise>	
-			</c:choose>
-		</c:forEach>
-		
-		<a href="javascript:loadPage('${page+1}');">[>]</a>
-		<a href="javascript:loadPage('${totalCount}');">[>>]</a>
-	</div>
+	<a href="javascript:loadPage('${page+1}');">[>]</a>
+	<a href="javascript:loadPage('${totalCount}');">[>>]</a>
 </div>
 
 <form method = "GET" id ="pagingForm" action = "${pageContext.request.contextPath}/article/list">
