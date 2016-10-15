@@ -2,37 +2,62 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="articleDao">
-	
+
 	<!-- 기사 목록 가져오기 -->
-	<select id="getArticleList" resultType="Map" parameterType="Map" statementType="CALLABLE">
+	<select id="getArticleList" resultType="Map" parameterType="Map"
+		statementType="CALLABLE">
 		<choose>
-			<when test = "selectedCategory eq 0">
+			<when test="selectedCategory eq 0">
 				SELECT * FROM
 				(
-					SELECT ROW_NUMBER() OVER (ORDER BY write_date) AS no, id, title, content, reporter, write_date, modify_date, keyword, like_count, FK_ArticleCategory
-					FROM ARTICLE
+				SELECT ROW_NUMBER() OVER (ORDER BY write_date) AS no, id, title, content,
+				reporter, write_date, modify_date, keyword, like_count,
+				FK_ArticleCategory
+				FROM ARTICLE
 				) a WHERE a.no BETWEEN #{start} AND #{end}
 			</when>
 			<otherwise>
 				SELECT * FROM
 				(
-					SELECT ROW_NUMBER() OVER (ORDER BY write_date) AS no, id, title, content, reporter, write_date, modify_date, keyword, like_count, FK_ArticleCategory
-					FROM ARTICLE 
-					WHERE FK_ArticleCategory = #{selectedCategory} 
-				) a WHERE a.no BETWEEN #{start} AND #{end} 
+				SELECT ROW_NUMBER() OVER (ORDER BY write_date) AS no, id, title, content,
+				reporter, write_date, modify_date, keyword, like_count,
+				FK_ArticleCategory
+				FROM ARTICLE
+				WHERE FK_ArticleCategory = #{selectedCategory}
+				) a WHERE a.no BETWEEN #{start} AND #{end}
 			</otherwise>
 		</choose>
 	</select>
-	
-	<select id="getArticleListCount" resultType="int" parameterType="Map" statementType="CALLABLE">
+
+	<!-- 총 기사가 몇개인지 카운팅 -->
+	<select id="getArticleListCount" resultType="int" parameterType="Map"
+		statementType="CALLABLE">
 		<choose>
-			<when test = "selectedCategory eq 0">
+			<when test="selectedCategory eq 0">
 				SELECT COUNT(*) FROM ARTICLE
 			</when>
 			<otherwise>
-				SELECT COUNT(*) FROM ARTICLE WHERE FK_ArticleCategory = #{selectedCategory}
+				SELECT COUNT(*) FROM ARTICLE WHERE FK_ArticleCategory =
+				#{selectedCategory}
 			</otherwise>
 		</choose>
 	</select>
+
+	<!-- 유저가 해당 게시물에 좋아요를 했는지 안했는지 카운팅 -->
+	<select id="checkLikeExist" resultType="int" parameterType="Map"
+		statementType="CALLABLE">
+		SELECT COUNT(*)
+		FROM LikeLog as ll
+		INNER JOIN Member as m
+		ON m.email = #{userEmail}
+		WHERE FK_Article = #{articleId}
+	</select>
+	
+	<!-- 좋아요 로그 및 count +1 -->
+	<insert id="insertLike" parameterType="Map" statementType="CALLABLE">
+    {
+    	call insertLike(#{userPk}, #{articleId})
+    }
+    </insert>
 	
 </mapper>

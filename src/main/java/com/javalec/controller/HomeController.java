@@ -19,6 +19,10 @@ public abstract interface HomeController {
 	@RequestMapping("/article/list")
 	public abstract ModelAndView article_list(HttpServletRequest request, HttpSession session) throws Exception;
 
+	// 기사 좋아요
+	@RequestMapping("article/doLike")
+	public abstract ModelAndView article_doLike(HttpServletRequest request, HttpSession session) throws Exception;
+	
 	// 키워드 설정
 	@RequestMapping("/keyword/setting")
 	public abstract ModelAndView keyword_setting(HttpServletRequest request, HttpSession session) throws Exception;

@@ -1,6 +1,7 @@
 package com.javalec.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -241,12 +242,14 @@ public class homeImpl implements HomeController {
 			return new ModelAndView("/share/alert").addObject("key", "아이디 불일치");
 		}
 
-		// �α��� ����ó��
-
+		
+		// 로그인 세션 저장 및 기본키 저장
 		session.setAttribute("isLogin", "true");
 		session.setAttribute("userEmail", map.get("email"));
-		System.out.println("세션저장 : userEmail : " + map.get("email") + "  isLogin : " + session.getAttribute("isLogin"));
-
+		int userPrimaryKey = memberDao.getUserPk(map);
+		session.setAttribute("userPk", userPrimaryKey);
+		
+		System.out.println("세션저장 : userPrimaryKey = "+ session.getAttribute("userPk") + " userEmail : " + map.get("email") + "  isLogin : " + session.getAttribute("isLogin"));
 		ModelAndView mav = new ModelAndView("index");
 		mav.addObject("isLogin", true);
 		return mav;
@@ -261,5 +264,32 @@ public class homeImpl implements HomeController {
 		session.setAttribute("userEmail", null);
 
 		return new ModelAndView("member/login");
+	}
+
+	@Override
+	public ModelAndView article_doLike(HttpServletRequest request, HttpSession session) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("Wecome article_doLike");
+		Map<String, Object> requestMap = func.parseMap(request);
+		String userEmail = session.getAttribute("userEmail").toString();
+		requestMap.put("userEmail", userEmail);
+
+		// 좋아요했는지 안했는지 검사
+		int count = articleDao.checkLikeExist(requestMap);
+		
+		if(count == 0){
+			//좋아요 처리 로직
+			Map<String, Object> likeMap = new HashMap<String, Object>();
+			likeMap.put("userPk", session.getAttribute("userPk"));
+			likeMap.put("articleId", requestMap.get("articleId"));
+			
+			//로그 Insert 및 like_count +1
+			articleDao.insertLike(likeMap);
+			
+			return new ModelAndView("/article/list"); 
+		}else{
+			//이미 좋아요 함.
+			return new ModelAndView("/share/alert").addObject("key", "이미 좋아요를 하셨습니다"); 
+		}
 	}
 }

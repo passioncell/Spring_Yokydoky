@@ -37,4 +37,8 @@
 		SELECT * FROM ARTICLE WHERE FK_ArticleCategory = #{selectedCategory}
 	</select>
 	
+	<select id="getUserPk" parameterType="Map" resultType="int" statementType="CALLABLE">
+		SELECT id FROM MEMBER WHERE email = #{email}
+	</select>
+	
 </mapper>

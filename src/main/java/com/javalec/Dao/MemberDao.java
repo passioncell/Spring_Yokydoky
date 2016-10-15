@@ -31,4 +31,8 @@ public class MemberDao extends SqlSessionDaoSupport{
 		getSqlSession().update("memberDao.updateMemberInfo", map);
 	}
 	
+	public Integer getUserPk(Map map){
+		return (Integer) getSqlSession().selectOne("memberDao.getUserPk", map);
+	}
+	
 }

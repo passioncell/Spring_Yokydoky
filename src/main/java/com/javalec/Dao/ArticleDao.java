@@ -15,4 +15,13 @@ public class ArticleDao  extends SqlSessionDaoSupport{
 	public Integer getArticleListCount(Map map){
 		return  (Integer) getSqlSession().selectOne("articleDao.getArticleListCount", map);
 	}
+	
+	public Integer checkLikeExist(Map map){
+		return (Integer) getSqlSession().selectOne("articleDao.checkLikeExist", map);
+	}
+	
+	public void insertLike(Map map){
+		getSqlSession().insert("articleDao.insertLike", map);
+	}
+	
 }
