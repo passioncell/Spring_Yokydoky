@@ -24,4 +24,8 @@ public class ArticleDao  extends SqlSessionDaoSupport{
 		getSqlSession().insert("articleDao.insertLike", map);
 	}
 	
+	public List<Map<String, Object>> getArticleKeywordList(Map map){
+		return  (List<Map<String, Object>>) getSqlSession().selectList("articleDao.getArticleKeywordList", map);
+	}
+	
 }

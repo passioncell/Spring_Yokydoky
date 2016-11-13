@@ -27,16 +27,16 @@ public class homeImpl implements HomeController {
 
 	@Autowired
 	private MemberDao memberDao;
-	
+
 	@Autowired
 	private ArticleDao articleDao;
-	
+
 	@Autowired
 	private KeywordDao keywordDao;
-	
+
 	private int maxrow = 8;
 
-	//생성자
+	// 생성자
 	public homeImpl() {
 	}
 
@@ -54,107 +54,107 @@ public class homeImpl implements HomeController {
 		// TODO Auto-generated method stub
 		System.out.println("Welcom article_list");
 		Map<String, Object> map = func.parseMap(request);
-		
+
 		String page = "1";
-		int start = 1 ;
-		int end = 8 ;
-		
-		//유저가 선택한 카테고리가 있다면 초기화(페이지 이동에선 이값이 없음.
-		if(map.get("selectedCategory") != null){
+		int start = 1;
+		int end = 8;
+
+		// 유저가 선택한 카테고리가 있다면 초기화(페이지 이동에선 이값이 없음.
+		if (map.get("selectedCategory") != null) {
 			int selectedCategory = Integer.parseInt(map.get("selectedCategory").toString());
 			map.put("selectedCategory", selectedCategory);
-			
+
 		}
-		
-		//전체 기사의 수
+
+		// 전체 기사의 수
 		int totalCount = articleDao.getArticleListCount(map);
-		
-		//첫번째 페이지가 아니라면,
-		if (map.get("page") != null && !(map.get("page").equals("")) ){
+
+		// 첫번째 페이지가 아니라면,
+		if (map.get("page") != null && !(map.get("page").equals(""))) {
 			page = request.getParameter("page");
-			start = (Integer.parseInt(page)-1) * maxrow + 1;
-			end = start + maxrow -1;
+			start = (Integer.parseInt(page) - 1) * maxrow + 1;
+			end = start + maxrow - 1;
 		}
-		
+
 		map.put("start", start);
 		map.put("end", end);
-		
+
 		System.out.println(map);
-		
 
 		List<Map<String, Object>> articleList = articleDao.getArticleList(map);
 		System.out.println(articleList);
-		
+
 		ModelAndView mav = new ModelAndView("article/list");
 		mav.addObject("selectedCategory", map.get("selectedCategory"));
 		mav.addObject("articleList", articleList);
 		mav.addObject("page", page);
 		mav.addObject("totalCount", totalCount);
-		
+
 		return mav;
 	}
-	
+
 	@Override
 	public ModelAndView deleteKeyword(HttpServletRequest request, HttpSession session) throws Exception {
-		Map <String, Object> map = func.parseMap(request);
+		Map<String, Object> map = func.parseMap(request);
 		map.put("email", session.getAttribute("userEmail"));
 		keywordDao.deleteKeyword(map);
-		
+
 		ModelAndView mav = new ModelAndView("share/alert");
 		mav.addObject("key", "키워드 삭제");
 		return mav;
 	}
-	
+
 	@Override
 	public ModelAndView keyword_setting(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("Welcom keyword_setting");
-		
+
 		Map<String, Object> map = func.parseMap(request);
 		map.put("selectedCategory", request.getAttribute("selectedCategory"));
 		map.put("email", session.getAttribute("userEmail"));
-		
+
 		List<Map<String, Object>> keywordList = keywordDao.getKeywordList();
 		ModelAndView mav = new ModelAndView("keyword/setting");
-		
-		//검색어 리스트 생성
+
+		// 검색어 리스트 생성
 		List<Object> jsonList = new ArrayList<Object>();
 		String rowString = null;
-		for(int i = 0; i<keywordList.size(); i++){
-			rowString = "{data:'',"+"value: '" + keywordList.get(i).get("keyword") +"'}";
+		for (int i = 0; i < keywordList.size(); i++) {
+			rowString = "{data:''," + "value: '" + keywordList.get(i).get("keyword") + "'}";
 			jsonList.add(rowString);
 		}
-		
-		//기존에 추가된 키워드는 삭제
+
+		// 기존에 추가된 키워드는 삭제
 		List<Map<String, Object>> myKeyword = keywordDao.getMyKeyword(map);
-		for(int i = 0; i<myKeyword.size(); i++){
-			for(int j =0; j<jsonList.size(); j++){
+		for (int i = 0; i < myKeyword.size(); i++) {
+			for (int j = 0; j < jsonList.size(); j++) {
 				String tmp[] = jsonList.get(j).toString().split("value: '");
-				tmp[1] =tmp[1].replace("'}", "");
-				if(tmp[1].equals(myKeyword.get(i).get("keyword").toString())){
+				tmp[1] = tmp[1].replace("'}", "");
+				if (tmp[1].equals(myKeyword.get(i).get("keyword").toString())) {
 					jsonList.remove(j);
 				}
 			}
 		}
-		
+
 		mav.addObject("map", map);
 		mav.addObject("keywordList", jsonList);
-		mav.addObject("myKeyword",myKeyword);
-		
+		mav.addObject("myKeyword", myKeyword);
+
 		System.out.println(myKeyword);
 		return mav;
 	}
-	
-	//나만의 키워드 추가
+
+	// 나만의 키워드 추가
 	@Override
 	public ModelAndView insertKeyword(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
 		String userEmail = (String) session.getAttribute("userEmail");
 		Map<String, Object> map = func.parseMap(request);
 		map.put("email", userEmail);
-		
-		keywordDao.insertKeyword(map);;
-		
+
+		keywordDao.insertKeyword(map);
+		;
+
 		ModelAndView mav = new ModelAndView("share/alert");
 		mav.addObject("key", "키워드 추가");
 		return mav;
@@ -242,14 +242,14 @@ public class homeImpl implements HomeController {
 			return new ModelAndView("/share/alert").addObject("key", "아이디 불일치");
 		}
 
-		
 		// 로그인 세션 저장 및 기본키 저장
 		session.setAttribute("isLogin", "true");
 		session.setAttribute("userEmail", map.get("email"));
 		int userPrimaryKey = memberDao.getUserPk(map);
 		session.setAttribute("userPk", userPrimaryKey);
-		
-		System.out.println("세션저장 : userPrimaryKey = "+ session.getAttribute("userPk") + " userEmail : " + map.get("email") + "  isLogin : " + session.getAttribute("isLogin"));
+
+		System.out.println("세션저장 : userPrimaryKey = " + session.getAttribute("userPk") + " userEmail : "
+				+ map.get("email") + "  isLogin : " + session.getAttribute("isLogin"));
 		ModelAndView mav = new ModelAndView("index");
 		mav.addObject("isLogin", true);
 		return mav;
@@ -276,20 +276,66 @@ public class homeImpl implements HomeController {
 
 		// 좋아요했는지 안했는지 검사
 		int count = articleDao.checkLikeExist(requestMap);
-		
-		if(count == 0){
-			//좋아요 처리 로직
+
+		if (count == 0) {
+			// 좋아요 처리 로직
 			Map<String, Object> likeMap = new HashMap<String, Object>();
 			likeMap.put("userPk", session.getAttribute("userPk"));
 			likeMap.put("articleId", requestMap.get("articleId"));
-			
-			//로그 Insert 및 like_count +1
+
+			// 로그 Insert 및 like_count +1
 			articleDao.insertLike(likeMap);
-			
-			return new ModelAndView("/article/list"); 
-		}else{
-			//이미 좋아요 함.
-			return new ModelAndView("/share/alert").addObject("key", "이미 좋아요를 하셨습니다"); 
+
+			return new ModelAndView("/article/list");
+		} else {
+			// 이미 좋아요 함.
+			return new ModelAndView("/share/alert").addObject("key", "이미 좋아요를 하셨습니다");
 		}
+	}
+
+	@Override
+	public ModelAndView article_keyword_list(HttpServletRequest request, HttpSession session) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("Welcom article_keyword_list");
+		Map<String, Object> map = func.parseMap(request);
+
+		String page = "1";
+		int start = 1;
+		int end = 8;
+
+		// 유저가 선택한 카테고리가 있다면 초기화(페이지 이동에선 이값이 없음.
+		if (map.get("selectedCategory") != null) {
+			int selectedCategory = Integer.parseInt(map.get("selectedCategory").toString());
+			map.put("selectedCategory", selectedCategory);
+
+		}
+
+		// 전체 기사의 수
+		int totalCount = articleDao.getArticleListCount(map);
+
+		// 첫번째 페이지가 아니라면,
+		if (map.get("page") != null && !(map.get("page").equals(""))) {
+			page = request.getParameter("page");
+			start = (Integer.parseInt(page) - 1) * maxrow + 1;
+			end = start + maxrow - 1;
+		}
+
+		map.put("start", start);
+		map.put("end", end);
+
+		//유저 기본키 가져오기
+		int userPk = (Integer) session.getAttribute("userPk");
+		map.put("userPk", userPk);
+		System.out.println(map);
+
+		List<Map<String, Object>> articleList = articleDao.getArticleKeywordList(map);
+		System.out.println(articleList);
+
+		ModelAndView mav = new ModelAndView("article/keywrod_list");
+		mav.addObject("articleList", articleList);
+		mav.addObject("page", page);
+		mav.addObject("totalCount", totalCount);
+
+		return mav;
 	}
 }
