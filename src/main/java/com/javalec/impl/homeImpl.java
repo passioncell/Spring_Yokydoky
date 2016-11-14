@@ -370,4 +370,38 @@ public class homeImpl implements HomeController {
 
 		return mav;
 	}
+
+	@Override
+	public ModelAndView article_rank_list(HttpServletRequest request, HttpSession session) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("Welcom article_rank_list");
+		Map<String, Object> map = func.parseMap(request);
+
+		String page = "1";
+		int start = 1;
+		int end = 8;
+
+		// 전체 기사의 수
+		int totalCount = articleDao.getArticleListCount(map);
+
+		// 첫번째 페이지가 아니라면,
+		if (map.get("page") != null && !(map.get("page").equals(""))) {
+			page = request.getParameter("page");
+			start = (Integer.parseInt(page) - 1) * maxrow + 1;
+			end = start + maxrow - 1;
+		}
+
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<Map<String, Object>> articleList = articleDao.getArticleRankList(map);
+		System.out.println(articleList);
+
+		ModelAndView mav = new ModelAndView("article/rank_list");
+		mav.addObject("articleList", articleList);
+		mav.addObject("page", page);
+		mav.addObject("totalCount", totalCount);
+
+		return mav;
+	}
 }

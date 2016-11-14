@@ -26,31 +26,50 @@ function test(id){
 }
 
 function listPageMove(page){
-
-	location.href="${pageContext.request.contextPath}/article/keywordList";
-	
+	switch (page){
+	case 'categoryList':
+		location.href="${pageContext.request.contextPath}/article/list?selectedCategory=0&page=1";
+		break;
+	case 'keyowrdList':
+		location.href="${pageContext.request.contextPath}/article/keywordList";
+		break;
+	case 'popularList':
+		location.href="${pageContext.request.contextPath}/article/rankList?page=1";
+		break;
+	}
 }
+
 </script>
 
 <div role="tabpanel">
 
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs" role="tablist">
-		<li role="presentation"><a href="#category"
-			aria-controls="category" role="tab" data-toggle="tab">카테고리별</a></li>
-		<li role="presentation" class="active">
-		<a href="" onclick = "listPageMove('keyowrd');" aria-controls="keyword" role="tab" data-toggle="tab">키워드순</a></li>
 		<li role="presentation">
-			<a href="#like" aria-controls="like" role="tab" data-toggle="tab">인기순</a></li>
+			<a href="" onclick = "listPageMove('categoryList');" aria-controls="category" role="tab" data-toggle="tab">카테고리별</a>
+		</li>
+		
+		<li role="presentation" class="active">
+			<a href="" onclick = "listPageMove('keyowrdList');" aria-controls="keyword" role="tab" data-toggle="tab">맞춤추천</a>
+		</li>
+		
+		<li role="presentation">
+			<a href="" onclick = "listPageMove('popularList');" aria-controls="like" role="tab" data-toggle="tab">인기순</a>
+		</li>
 	</ul>
 
 	<!-- Tab panes -->
 	<div class="tab-content">
-		<div role="tabpanel" class="tab-pane active" id="category">기사의
-			카테고리별 순으로 보여집니다.</div>
-		<div role="tabpanel" class="tab-pane" id="keyword" href = "${pageContext.request.contextPath}/article/list"></div>
-		<div role="tabpanel" class="tab-pane" id="like">인기가 많은 기사순으로
-			보여집니다.</div>
+		<div role="tabpanel" class="tab-pane" id="category">
+			기사의 카테고리별 순으로 보여집니다.
+		</div>
+		
+		<div role="tabpanel" class="tab-pane active" id="keyword">
+			사용자가 추가한 키워드별로 맞춤추천 해드립니다.
+		</div>
+		<div role="tabpanel" class="tab-pane" id="like">
+			인기가 많은 기사순으로 보여집니다.
+		</div>
 	</div>
 
 </div>
@@ -75,16 +94,16 @@ function listPageMove(page){
 <br>
 
 
-<ul class="nav nav-pills" role="tablist">
-	<!-- active 부분 현재 카테고리로 활성화되게 -->
-	<li role="presentation" class="active"><a href="#">전체</a></li>
-	<li role="presentation"><a href="javascript:moveCategory('1');">문화</a></li>
-	<li role="presentation"><a href="javascript:moveCategory('2');">경제</a></li>
-	<li role="presentation"><a href="javascript:moveCategory('3');">국제</a></li>
-	<li role="presentation"><a href="javascript:moveCategory('4');">과학/IT</a></li>
-	<li role="presentation"><a href="javascript:moveCategory('5');">정치</a></li>
-	<li role="presentation"><a href="javascript:moveCategory('6');">사회</a></li>
-</ul>
+<!-- <ul class="nav nav-pills" role="tablist"> -->
+<!-- 	<!-- active 부분 현재 카테고리로 활성화되게 --> 
+<!-- 	<li role="presentation" class="active"><a href="#">전체</a></li> -->
+<!-- 	<li role="presentation"><a href="javascript:moveCategory('1');">문화</a></li> -->
+<!-- 	<li role="presentation"><a href="javascript:moveCategory('2');">경제</a></li> -->
+<!-- 	<li role="presentation"><a href="javascript:moveCategory('3');">국제</a></li> -->
+<!-- 	<li role="presentation"><a href="javascript:moveCategory('4');">과학/IT</a></li> -->
+<!-- 	<li role="presentation"><a href="javascript:moveCategory('5');">정치</a></li> -->
+<!-- 	<li role="presentation"><a href="javascript:moveCategory('6');">사회</a></li> -->
+<!-- </ul> -->
 <br>
 <!-- moveCategory -->
 <div class="row">

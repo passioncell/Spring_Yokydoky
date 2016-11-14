@@ -10,9 +10,12 @@ function test(id){
             url: "/article/doLike?articleId=" + id 
           , dataType : 'json'
           , success: function(data) {
+        	  //result결과
+        	  //json객체의 flag가 Y이면 data라는 성공메시지를 result변수에 담는다.
         	  if(data.success == true){
         		  alert("좋아요 하셨습니다.");
         		  window.location.reload();
+              //json객체의 flag가 Y가아닌 그이후는 data라는 실패메시지를 result변수에 담는다.
         	  } else {
         		  alert("이미 좋아요 하셨습니다.");
         	  }
@@ -34,16 +37,15 @@ function listPageMove(page){
 		location.href="${pageContext.request.contextPath}/article/rankList?page=1";
 		break;
 	}
-	
-	
 }
+
 </script>
 
 <div role="tabpanel">
 
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs" role="tablist">
-		<li role="presentation" class="active">
+		<li role="presentation">
 			<a href="" onclick = "listPageMove('categoryList');" aria-controls="category" role="tab" data-toggle="tab">카테고리별</a>
 		</li>
 		
@@ -51,21 +53,21 @@ function listPageMove(page){
 			<a href="" onclick = "listPageMove('keyowrdList');" aria-controls="keyword" role="tab" data-toggle="tab">맞춤추천</a>
 		</li>
 		
-		<li role="presentation">
+		<li role="presentation" class="active">
 			<a href="" onclick = "listPageMove('popularList');" aria-controls="like" role="tab" data-toggle="tab">인기순</a>
 		</li>
 	</ul>
 
 	<!-- Tab panes -->
 	<div class="tab-content">
-		<div role="tabpanel" class="tab-pane active" id="category">
+		<div role="tabpanel" class="tab-pane" id="category">
 			기사의 카테고리별 순으로 보여집니다.
 		</div>
 		
 		<div role="tabpanel" class="tab-pane" id="keyword">
 			사용자가 추가한 키워드별로 맞춤추천 해드립니다.
 		</div>
-		<div role="tabpanel" class="tab-pane" id="like">
+		<div role="tabpanel" class="tab-pane active" id="like">
 			인기가 많은 기사순으로 보여집니다.
 		</div>
 	</div>
@@ -92,16 +94,16 @@ function listPageMove(page){
 <br>
 
 
-<ul class="nav nav-pills" role="tablist">
-	<!-- active 부분 현재 카테고리로 활성화되게 -->
-	<li role="presentation" class="active"><a href="#">전체</a></li>
-	<li role="presentation"><a href="javascript:moveCategory('1');">문화</a></li>
-	<li role="presentation"><a href="javascript:moveCategory('2');">경제</a></li>
-	<li role="presentation"><a href="javascript:moveCategory('3');">국제</a></li>
-	<li role="presentation"><a href="javascript:moveCategory('4');">과학/IT</a></li>
-	<li role="presentation"><a href="javascript:moveCategory('5');">정치</a></li>
-	<li role="presentation"><a href="javascript:moveCategory('6');">사회</a></li>
-</ul>
+<!-- <ul class="nav nav-pills" role="tablist"> -->
+<!-- 	<!-- active 부분 현재 카테고리로 활성화되게 --> 
+<!-- 	<li role="presentation" class="active"><a href="#">전체</a></li> -->
+<!-- 	<li role="presentation"><a href="javascript:moveCategory('1');">문화</a></li> -->
+<!-- 	<li role="presentation"><a href="javascript:moveCategory('2');">경제</a></li> -->
+<!-- 	<li role="presentation"><a href="javascript:moveCategory('3');">국제</a></li> -->
+<!-- 	<li role="presentation"><a href="javascript:moveCategory('4');">과학/IT</a></li> -->
+<!-- 	<li role="presentation"><a href="javascript:moveCategory('5');">정치</a></li> -->
+<!-- 	<li role="presentation"><a href="javascript:moveCategory('6');">사회</a></li> -->
+<!-- </ul> -->
 <br>
 <!-- moveCategory -->
 <div class="row">
@@ -159,24 +161,19 @@ function listPageMove(page){
 
 <form method="GET" id="pagingForm"
 	action="${pageContext.request.contextPath}/article/list">
-	<input type="hidden" name="page" value=""> <input type="hidden"
-		name="selectedCategory" value="">
+	<input type="hidden" name="page" value=""> 
 </form>
 
 <script>
+	// 페이지 이동시 에러 남아있음 (뒤로가기) 
 	function loadPage(page) {
 		// 		map 하고 현재 입력한 page를 서버로 전달
+		if(page == '' || page == null){
+			page = 2
+		}
 		page = Math.ceil(page);
 		pagingForm.page.value = page;
-		pagingForm.selectedCategory.value = ${selectedCategory}
 
-		pagingForm.submit();
-	}
-
-	function moveCategory(selectedCategory) {
-		// 		map 하고 현재 입력한 page를 서버로 전달
-		pagingForm.selectedCategory.value = selectedCategory;
-		pagingForm.page.value = 1;
 		pagingForm.submit();
 	}
 </script>

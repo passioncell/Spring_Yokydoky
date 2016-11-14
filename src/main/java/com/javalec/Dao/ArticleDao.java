@@ -20,6 +20,10 @@ public class ArticleDao  extends SqlSessionDaoSupport{
 		return  (List<Map<String, Object>>) getSqlSession().selectList("articleDao.getKeywordArticleList", list);
 	}
 	
+	public List<Map<String, Object>> getArticleRankList(Map map){
+		return  (List<Map<String, Object>>) getSqlSession().selectList("articleDao.getArticleRankList", map);
+	}
+	
 	public Integer checkLikeExist(Map map){
 		return (Integer) getSqlSession().selectOne("articleDao.checkLikeExist", map);
 	}

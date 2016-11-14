@@ -29,7 +29,12 @@ public abstract interface HomeController {
 	// 요약기사 : 키워드순
 	@RequestMapping("/article/keywordList")
 	public abstract ModelAndView article_keyword_list(HttpServletRequest request, HttpSession session) throws Exception;
+	
+	// 요약기사 : 좋아요(랭킹순)
+	@RequestMapping("/article/rankList")
+	public abstract ModelAndView article_rank_list(HttpServletRequest request, HttpSession session) throws Exception;
 
+	
 	// 키워드 설정
 	@RequestMapping("/keyword/setting")
 	public abstract ModelAndView keyword_setting(HttpServletRequest request, HttpSession session) throws Exception;

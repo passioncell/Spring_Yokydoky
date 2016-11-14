@@ -3,7 +3,7 @@
 
 <mapper namespace="articleDao">
 
-	<!-- 기사 목록 가져오기 -->
+	<!-- 기사 목록 가져오기 (카테고리)-->
 	<select id="getArticleList" resultType="Map" parameterType="Map"
 		statementType="CALLABLE">
 		<choose>
@@ -49,6 +49,7 @@
 		</choose>
 	</select>
 
+	<!-- 맞춤추천 기사 목록 가져오기 -->
 	<select id="getKeywordArticleList" resultType="Map" parameterType="List"
 		statementType="CALLABLE">
 		SELECT *
@@ -59,6 +60,23 @@
 	        keyword like '%' + #{item} + '%' 
 	 	</foreach>
 	</select>
+	
+	<!-- 기사 목록 가져오기 (좋아요순)-->
+	<select id="getArticleRankList" resultType="Map" parameterType="Map"
+		statementType="CALLABLE">
+		SELECT * FROM
+				(
+				SELECT ROW_NUMBER() OVER (ORDER BY
+				write_date) AS no, id, title, content,
+				reporter, write_date,
+				modify_date, keyword, like_count,
+				FK_ArticleCategory
+				FROM ARTICLE
+				) a
+				WHERE a.no BETWEEN #{start} AND #{end}
+	</select>
+	
+	
 	
 	<!-- 유저가 해당 게시물에 좋아요를 했는지 안했는지 카운팅 -->
 	<select id="checkLikeExist" resultType="int" parameterType="Map"
