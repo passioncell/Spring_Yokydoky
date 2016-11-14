@@ -363,7 +363,7 @@ public class homeImpl implements HomeController {
 		List<Map<String, Object>> articleList = articleDao.getKeywordArticleList(keywordList);
 		System.out.println("articleList"+ articleList);
 
-		ModelAndView mav = new ModelAndView("article/keywrod_list");
+		ModelAndView mav = new ModelAndView("article/keyword_list");
 		mav.addObject("articleList", articleList);
 		mav.addObject("page", page);
 		mav.addObject("totalCount", totalCount);
