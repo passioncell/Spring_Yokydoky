@@ -2,56 +2,35 @@
 	pageEncoding="UTF-8"%>
 <jsp:directive.include file="../share/header.jsp" />
 
-			<script type="text/javascript">
-			function test(id){
-				$(function () {
-					//비동기 통신을 하여 json타입으로 호출한다.
-					$.ajax({
-			            url: "/article/doLike?articleId=" + id 
-			          , dataType : 'json'
-			          , success: function(data) {
-			        	  //result결과
-			        	  //json객체의 flag가 Y이면 data라는 성공메시지를 result변수에 담는다.
-			        	  if(data.success == true){
-			        		  alert("좋아요 하셨습니다.");
-			        		  window.location.reload();
-			              //json객체의 flag가 Y가아닌 그이후는 data라는 실패메시지를 result변수에 담는다.
-			        	  } else {
-			        		  alert("이미 좋아요 하셨습니다.");
-			        	  }
-			            }
-			    	});
-				});
-				
-			}
-			
-			
-// 				$(function test(id){
-// 					$("#like_button").click(function(){
-// 						//비동기 통신을 하여 json타입으로 호출한다.
-// 						$.ajax({
-// 				            url: "/article/doLike?articleId=" + id 
-// 				          , dataType : 'json'
-// 				          , success: function(data) {
-// 				        	  //result결과
-// 				        	  //json객체의 flag가 Y이면 data라는 성공메시지를 result변수에 담는다.
-// 				        	  if(data.result == "true"){
-// 				        		  alert("좋아요 하였습니다.");
-// 				              //json객체의 flag가 Y가아닌 그이후는 data라는 실패메시지를 result변수에 담는다.
-// 				        	  } else {
-// 				        		  alert("이미 좋아요 하셨습니다.");
-// 				        	  }
-// 				            }
-// 				    	});
-// 			    	})
-					
-// 				});
-			    	
-			
-				
-			
-			
-			</script>
+<script type="text/javascript">
+function test(id){
+	$(function () {
+		//비동기 통신을 하여 json타입으로 호출한다.
+		$.ajax({
+            url: "/article/doLike?articleId=" + id 
+          , dataType : 'json'
+          , success: function(data) {
+        	  //result결과
+        	  //json객체의 flag가 Y이면 data라는 성공메시지를 result변수에 담는다.
+        	  if(data.success == true){
+        		  alert("좋아요 하셨습니다.");
+        		  window.location.reload();
+              //json객체의 flag가 Y가아닌 그이후는 data라는 실패메시지를 result변수에 담는다.
+        	  } else {
+        		  alert("이미 좋아요 하셨습니다.");
+        	  }
+            }
+    	});
+	});
+	
+}
+
+function listPageMove(page){
+
+	location.href="${pageContext.request.contextPath}/article/keywordList";
+	
+}
+</script>
 
 <div role="tabpanel">
 
@@ -59,18 +38,17 @@
 	<ul class="nav nav-tabs" role="tablist">
 		<li role="presentation" class="active"><a href="#category"
 			aria-controls="category" role="tab" data-toggle="tab">카테고리별</a></li>
-		<li role="presentation"><a href="#keyword"
-			aria-controls="keyword" role="tab" data-toggle="tab">키워드순</a></li>
-		<li role="presentation"><a href="#like" aria-controls="like"
-			role="tab" data-toggle="tab">인기순</a></li>
+		<li role="presentation">
+		<a href="" onclick = "listPageMove('keyowrd');" aria-controls="keyword" role="tab" data-toggle="tab">키워드순</a></li>
+		<li role="presentation">
+			<a href="#like" aria-controls="like" role="tab" data-toggle="tab">인기순</a></li>
 	</ul>
 
 	<!-- Tab panes -->
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane active" id="category">기사의
 			카테고리별 순으로 보여집니다.</div>
-		<div role="tabpanel" class="tab-pane" id="keyword">사용자가 설정한 키워드
-			중요도순으로 보여집니다.</div>
+		<div role="tabpanel" class="tab-pane" id="keyword" href = "${pageContext.request.contextPath}/article/list"></div>
 		<div role="tabpanel" class="tab-pane" id="like">인기가 많은 기사순으로
 			보여집니다.</div>
 	</div>
@@ -171,12 +149,10 @@
 <script>
 	function loadPage(page) {
 		// 		map 하고 현재 입력한 page를 서버로 전달
+		page = Math.ceil(page);
 		pagingForm.page.value = page;
-		pagingForm.selectedCategory.value = $
-		{
-			selectedCategory
-		}
-		;
+		pagingForm.selectedCategory.value = ${selectedCategory}
+
 		pagingForm.submit();
 	}
 

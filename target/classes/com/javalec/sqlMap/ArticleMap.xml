@@ -49,6 +49,17 @@
 		</choose>
 	</select>
 
+	<select id="getKeywordArticleList" resultType="Map" parameterType="List"
+		statementType="CALLABLE">
+		SELECT *
+		FROM Article 
+		WHERE 
+		<foreach item="item" index="index" collection="list"
+	      open="(" separator="or" close=")">
+	        keyword like '%' + #{item} + '%' 
+	 	</foreach>
+	</select>
+	
 	<!-- 유저가 해당 게시물에 좋아요를 했는지 안했는지 카운팅 -->
 	<select id="checkLikeExist" resultType="int" parameterType="Map"
 		statementType="CALLABLE">
@@ -66,8 +77,5 @@
 		}
 	</insert>
 
-	<select id="getArticleKeywordList" resultType="Map"
-		parameterType="Map" statementType="CALLABLE">
-	</select>
 
 </mapper>

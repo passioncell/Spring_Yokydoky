@@ -78,9 +78,7 @@ public class homeImpl implements HomeController {
 
 		map.put("start", start);
 		map.put("end", end);
-
-		System.out.println(map);
-
+		
 		List<Map<String, Object>> articleList = articleDao.getArticleList(map);
 		System.out.println(articleList);
 
@@ -337,13 +335,6 @@ public class homeImpl implements HomeController {
 		int start = 1;
 		int end = 8;
 
-		// 유저가 선택한 카테고리가 있다면 초기화(페이지 이동에선 이값이 없음.
-		if (map.get("selectedCategory") != null) {
-			int selectedCategory = Integer.parseInt(map.get("selectedCategory").toString());
-			map.put("selectedCategory", selectedCategory);
-
-		}
-
 		// 전체 기사의 수
 		int totalCount = articleDao.getArticleListCount(map);
 
@@ -360,10 +351,17 @@ public class homeImpl implements HomeController {
 		// 유저 기본키 가져오기
 		int userPk = (Integer) session.getAttribute("userPk");
 		map.put("userPk", userPk);
-		System.out.println(map);
+		map.put("email", session.getAttribute("userEmail"));
+		List<Map<String, Object>> tmpKeywordList = keywordDao.getMyKeyword(map);
+		
+		List<String> keywordList = new ArrayList<String>();
+		for(int i = 0; i < tmpKeywordList.size(); i++ ){
+			keywordList.add(tmpKeywordList.get(i).get("keyword").toString());
+		}
 
-		List<Map<String, Object>> articleList = articleDao.getArticleKeywordList(map);
-		System.out.println(articleList);
+
+		List<Map<String, Object>> articleList = articleDao.getKeywordArticleList(keywordList);
+		System.out.println("articleList"+ articleList);
 
 		ModelAndView mav = new ModelAndView("article/keywrod_list");
 		mav.addObject("articleList", articleList);
