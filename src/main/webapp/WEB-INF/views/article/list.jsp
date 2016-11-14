@@ -3,28 +3,54 @@
 <jsp:directive.include file="../share/header.jsp" />
 
 			<script type="text/javascript">
-// 					$(function test(id){
-// 				    	$("#like_button").click(function(){
-// 							//비동기 통신을 하여 json타입으로 호출한다.
-// 							$.ajax({
-// 					            url: "/article/doLike?articleId=" + id 
-// 					          , dataType : 'json'
-// 					          , success: function(data) {
-// 					        	  //result결과
-// 					        	  //json객체의 flag가 Y이면 data라는 성공메시지를 result변수에 담는다.
-// 					        	  if(data.result == "true"){
-// 					        		  alert("좋아요 하였습니다.");
-// 					              //json객체의 flag가 Y가아닌 그이후는 data라는 실패메시지를 result변수에 담는다.
-// 					        	  } else {
-// 					        		  alert("이미 좋아요 하셨습니다.");
-// 					        	  }
-// 					            }
-// 					    	});
-// 				    	})
-// 					})
 			function test(id){
-				alert(id);
+				$(function () {
+					//비동기 통신을 하여 json타입으로 호출한다.
+					$.ajax({
+			            url: "/article/doLike?articleId=" + id 
+			          , dataType : 'json'
+			          , success: function(data) {
+			        	  //result결과
+			        	  //json객체의 flag가 Y이면 data라는 성공메시지를 result변수에 담는다.
+			        	  if(data.success == true){
+			        		  alert("좋아요 하셨습니다.");
+			        		  window.location.reload();
+			              //json객체의 flag가 Y가아닌 그이후는 data라는 실패메시지를 result변수에 담는다.
+			        	  } else {
+			        		  alert("이미 좋아요 하셨습니다.");
+			        	  }
+			            }
+			    	});
+				});
+				
 			}
+			
+			
+// 				$(function test(id){
+// 					$("#like_button").click(function(){
+// 						//비동기 통신을 하여 json타입으로 호출한다.
+// 						$.ajax({
+// 				            url: "/article/doLike?articleId=" + id 
+// 				          , dataType : 'json'
+// 				          , success: function(data) {
+// 				        	  //result결과
+// 				        	  //json객체의 flag가 Y이면 data라는 성공메시지를 result변수에 담는다.
+// 				        	  if(data.result == "true"){
+// 				        		  alert("좋아요 하였습니다.");
+// 				              //json객체의 flag가 Y가아닌 그이후는 data라는 실패메시지를 result변수에 담는다.
+// 				        	  } else {
+// 				        		  alert("이미 좋아요 하셨습니다.");
+// 				        	  }
+// 				            }
+// 				    	});
+// 			    	})
+					
+// 				});
+			    	
+			
+				
+			
+			
 			</script>
 
 <div role="tabpanel">
@@ -101,7 +127,9 @@
 					${item["content"]} <br> <br>
 
 					<button type="button" id="like_button" name="like_button"
-						class="btn btn-default" onclick="test(<c:out value="${item['articleId']}"/>)">좋아요</button>
+						class="btn btn-default" onclick="test(${item['id']});">좋아요</button>
+					
+						
 					<div id="result">
 						<span class="label label-danger">${item['like_count']}</span>
 					</div>
