@@ -2,39 +2,70 @@
 	pageEncoding="UTF-8"%>
 <jsp:directive.include file="../share/header.jsp" />
 
+			<script type="text/javascript">
+// 					$(function test(id){
+// 				    	$("#like_button").click(function(){
+// 							//비동기 통신을 하여 json타입으로 호출한다.
+// 							$.ajax({
+// 					            url: "/article/doLike?articleId=" + id 
+// 					          , dataType : 'json'
+// 					          , success: function(data) {
+// 					        	  //result결과
+// 					        	  //json객체의 flag가 Y이면 data라는 성공메시지를 result변수에 담는다.
+// 					        	  if(data.result == "true"){
+// 					        		  alert("좋아요 하였습니다.");
+// 					              //json객체의 flag가 Y가아닌 그이후는 data라는 실패메시지를 result변수에 담는다.
+// 					        	  } else {
+// 					        		  alert("이미 좋아요 하셨습니다.");
+// 					        	  }
+// 					            }
+// 					    	});
+// 				    	})
+// 					})
+			function test(id){
+				alert(id);
+			}
+			</script>
+
 <div role="tabpanel">
 
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#category" aria-controls="category" role="tab" data-toggle="tab">카테고리별</a></li>
-    <li role="presentation"><a href="#keyword" aria-controls="keyword" role="tab" data-toggle="tab">키워드순</a></li>
-    <li role="presentation"><a href="#like" aria-controls="like" role="tab" data-toggle="tab">인기순</a></li>
-  </ul>
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active"><a href="#category"
+			aria-controls="category" role="tab" data-toggle="tab">카테고리별</a></li>
+		<li role="presentation"><a href="#keyword"
+			aria-controls="keyword" role="tab" data-toggle="tab">키워드순</a></li>
+		<li role="presentation"><a href="#like" aria-controls="like"
+			role="tab" data-toggle="tab">인기순</a></li>
+	</ul>
 
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="category">기사의 카테고리별 순으로 보여집니다.</div>
-    <div role="tabpanel" class="tab-pane" id="keyword">사용자가 설정한 키워드 중요도순으로 보여집니다.</div>
-    <div role="tabpanel" class="tab-pane" id="like">인기가 많은 기사순으로 보여집니다.</div>
-  </div>
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="category">기사의
+			카테고리별 순으로 보여집니다.</div>
+		<div role="tabpanel" class="tab-pane" id="keyword">사용자가 설정한 키워드
+			중요도순으로 보여집니다.</div>
+		<div role="tabpanel" class="tab-pane" id="like">인기가 많은 기사순으로
+			보여집니다.</div>
+	</div>
 
 </div>
 
 <div>
 
-<br>
+	<br>
 
-<div class="dropdown">
-  <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    요약율선택
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-    <li>30%</li>
-    <li>40%</li>
-    <li>50%</li>
-  </ul>
-</div>
+	<div class="dropdown">
+		<button id="dLabel" type="button" data-toggle="dropdown"
+			aria-haspopup="true" aria-expanded="false">
+			요약율선택 <span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+			<li>30%</li>
+			<li>40%</li>
+			<li>50%</li>
+		</ul>
+	</div>
 </div>
 
 <br>
@@ -54,6 +85,8 @@
 <!-- moveCategory -->
 <div class="row">
 	<c:forEach items="${articleList}" var="item">
+
+
 		<div class="col-sm-6">
 			<div class="panel panel-info">
 				<div class="panel-heading">
@@ -65,15 +98,20 @@
 						리포터 : ${item["reporter"]} <br /> 작성일시 : ${item["write_date"]} <br />
 						수정일시 : ${item["modify_date"]} <br /> 키워드 : ${item["keyword"]} <br />
 					</p>
-					${item["content"]}
-					<br><br>
-					<a href="doLike?articleId=${item['id']}"><span class="label label-danger">좋아요 : ${item['like_count']}</span></a>
-					
+					${item["content"]} <br> <br>
+
+					<button type="button" id="like_button" name="like_button"
+						class="btn btn-default" onclick="test(<c:out value="${item['articleId']}"/>)">좋아요</button>
+					<div id="result">
+						<span class="label label-danger">${item['like_count']}</span>
+					</div>
+
 				</div>
 			</div>
 		</div>
 	</c:forEach>
 </div>
+
 <div align="center">
 	<a href="javascript:loadPage('1');">[<<]</a> <a
 		href="javascript:loadPage('${page-1}');">[<]</a>

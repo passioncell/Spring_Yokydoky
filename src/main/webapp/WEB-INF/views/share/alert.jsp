@@ -58,6 +58,13 @@
       </script>
    </c:if>
    
+   <c:if test = "${key eq '좋아요 하였습니다.'}">
+      <script>
+         alert("좋아요 하였습니다.");
+         history.go(-1);
+         window.location.reload(true);
+      </script>
+   </c:if>
    
    
   

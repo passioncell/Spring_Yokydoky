@@ -10,9 +10,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.JsonObject;
 import com.javalec.Dao.ArticleDao;
 import com.javalec.Dao.KeywordDao;
 import com.javalec.Dao.MemberDao;
@@ -267,7 +267,7 @@ public class homeImpl implements HomeController {
 	}
 
 	@Override
-	public ModelAndView article_doLike(HttpServletRequest request, HttpSession session) throws Exception {
+	public @ResponseBody Map<String , Object> article_doLike(HttpServletRequest request, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("Wecome article_doLike");
 		Map<String, Object> requestMap = func.parseMap(request);
@@ -277,6 +277,33 @@ public class homeImpl implements HomeController {
 		// 좋아요했는지 안했는지 검사
 		int count = articleDao.checkLikeExist(requestMap);
 
+		
+		
+		Map<String, Object> jsonObject = new HashMap<String, Object>();
+	    Map<String, Object> jsonSubObject = null;
+	    ArrayList<Map<String, Object>> jsonList = new ArrayList<Map<String, Object>>();
+	         
+//	    //1번째 데이터
+//	    jsonSubObject = new HashMap<String, Object>();
+//	    jsonSubObject.put("idx", 1);
+//	    jsonSubObject.put("title", "제목입니다");
+//	    jsonSubObject.put("create_date", new Date());
+//	    jsonList.add(jsonSubObject);
+//	    //2번째 데이터
+//	    jsonSubObject = new HashMap<String, Object>();
+//	    jsonSubObject.put("idx", 2);
+//	    jsonSubObject.put("title", "두번째제목입니다");
+//	    jsonSubObject.put("create_date", new Date());
+//	    jsonList.add(jsonSubObject);
+//	    
+//	    jsonSubObject = new HashMap<String, Object>();
+//	    jsonSubObject.put("idx", 1);
+//	    jsonSubObject.put("isExist", true);
+//	    jsonList.add(jsonSubObject);
+	    
+	    jsonObject.put("success", true);
+	         
+	    
 		if (count == 0) {
 			// 좋아요 처리 로직
 			Map<String, Object> likeMap = new HashMap<String, Object>();
@@ -285,11 +312,18 @@ public class homeImpl implements HomeController {
 
 			// 로그 Insert 및 like_count +1
 			articleDao.insertLike(likeMap);
-
-			return new ModelAndView("/article/list");
+			
+			jsonObject.put("success", true);
+			
+			// return new ModelAndView("/share/alert").addObject("key", "좋아요
+			// 하였습니다.");
+			return jsonObject;
 		} else {
 			// 이미 좋아요 함.
-			return new ModelAndView("/share/alert").addObject("key", "이미 좋아요를 하셨습니다");
+			// return new ModelAndView("/share/alert").addObject("key", "이미 좋아요를
+			// 하셨습니다");
+			jsonObject.put("success", false);
+			return jsonObject;
 		}
 	}
 
@@ -323,7 +357,7 @@ public class homeImpl implements HomeController {
 		map.put("start", start);
 		map.put("end", end);
 
-		//유저 기본키 가져오기
+		// 유저 기본키 가져오기
 		int userPk = (Integer) session.getAttribute("userPk");
 		map.put("userPk", userPk);
 		System.out.println(map);
