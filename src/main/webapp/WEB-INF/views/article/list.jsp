@@ -200,10 +200,11 @@ function listPageMove(page){
 </form>
 
 <form method="POST" id="sumRateForm"
-	action="${pageContext.request.contextPath}/member/set_rate">
+	action="${pageContext.request.contextPath}/article/list">
 	 <input type="hidden" name="rate" value="">
 	 <input type="hidden" name="page" value="1">
 	 <input type="hidden" name="selectedCategory" value="">
+	 <input type="hidden" name="returnPage" value="list">
 </form>
 
 <script>

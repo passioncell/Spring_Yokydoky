@@ -54,7 +54,12 @@ public class homeImpl implements HomeController {
 		// TODO Auto-generated method stub
 		System.out.println("Welcom article_list");
 		Map<String, Object> map = func.parseMap(request);
-
+		
+		// 기본값
+		if(map.get("rate")==null){
+			map.put("rate", "30");
+		}
+		
 		String page = "1";
 		int start = 1;
 		int end = 8;
@@ -80,8 +85,15 @@ public class homeImpl implements HomeController {
 		map.put("end", end);
 		
 		List<Map<String, Object>> articleList = articleDao.getArticleList(map);
-		System.out.println(articleList);
-
+		
+		List<String> sumList = func.extractText(articleList, map.get("rate").toString());
+		
+		for(int i=0; i < sumList.size(); i++){
+			articleList.get(i).remove("content");
+			articleList.get(i).put("content",sumList.get(i));
+		}
+		System.out.println(map);
+//		System.out.println(articleList);
 		ModelAndView mav = new ModelAndView("article/list");
 		mav.addObject("selectedCategory", map.get("selectedCategory"));
 		mav.addObject("articleList", articleList);
@@ -405,14 +417,27 @@ public class homeImpl implements HomeController {
 		return mav;
 	}
 
-	@Override
-	public ModelAndView member_set_rate(HttpServletRequest request, HttpSession session) throws Exception {
-		// TODO Auto-generated method stub
-		System.out.println("Welcom member_set_rate");
-		Map<String, Object> map = func.parseMap(request);
-		System.out.println(map);
-		
-		ModelAndView mav = new ModelAndView("article/keyword_list");
-		return mav;
-	}
+//	@Override
+//	public ModelAndView member_set_rate(HttpServletRequest request, HttpSession session) throws Exception {
+//		// TODO Auto-generated method stub
+//		System.out.println("Welcom member_set_rate");
+//		Map<String, Object> map = func.parseMap(request);
+//		System.out.println(map);
+//		
+//		ModelAndView mav= null;
+//		System.out.println(map.get("returnPage").toString());
+//		
+//		if(map.get("returnPage").toString().equals("list")){//123
+//			return article_list(request, session);
+//		}else if(map.get("returnPage").toString() == "keyword"){
+//			mav = new ModelAndView("article/keyword_list");
+//		}else{
+//			mav = new ModelAndView("article/rank_list");
+//		}
+//		map.remove("returnPage");
+//		
+//		mav.addObject(map);
+//	
+//		return mav;
+//	}
 }

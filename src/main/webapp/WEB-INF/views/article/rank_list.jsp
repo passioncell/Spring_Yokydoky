@@ -75,19 +75,15 @@ function listPageMove(page){
 </div>
 
 <div>
-
 	<br>
-
 	<div class="dropdown">
-		<button id="dLabel" type="button" data-toggle="dropdown"
-			aria-haspopup="true" aria-expanded="false">
-			요약율선택 <span class="caret"></span>
-		</button>
-		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-			<li>30%</li>
-			<li>40%</li>
-			<li>50%</li>
-		</ul>
+	  <button class="dropbtn">요약율 선택</button>
+	  <div class="dropdown-content">
+	  	<a href="#" onclick = "set_rate(1)">HeadLine</a>
+	    <a href="#" onclick = "set_rate(30)">30%</a>
+	    <a href="#" onclick = "set_rate(40)">40%</a>
+	    <a href="#" onclick = "set_rate(50)">50%</a>
+	  </div>
 	</div>
 </div>
 
@@ -164,6 +160,14 @@ function listPageMove(page){
 	<input type="hidden" name="page" value=""> 
 </form>
 
+<form method="POST" id="sumRateForm"
+	action="${pageContext.request.contextPath}/article/keywordList">
+	 <input type="hidden" name="rate" value="">
+	 <input type="hidden" name="page" value="1">
+	 <input type="hidden" name="selectedCategory" value="">
+	 <input type="hidden" name="returnPage" value="list">
+</form>
+
 <script>
 	// 페이지 이동시 에러 남아있음 (뒤로가기) 
 	function loadPage(page) {
@@ -175,6 +179,13 @@ function listPageMove(page){
 		pagingForm.page.value = page;
 
 		pagingForm.submit();
+	}
+	
+	function set_rate(rate){
+		// 요약율 서버로 전달;
+		sumRateForm.rate.value = rate;
+		sumRateForm.selectedCategory.value = ${selectedCategory};
+		sumRateForm.submit();
 	}
 </script>
 <jsp:directive.include file="../share/footer.jsp" />
