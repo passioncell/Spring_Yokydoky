@@ -58,7 +58,7 @@ public class homeImpl implements HomeController {
 		String page = "1";
 		int start = 1;
 		int end = 8;
-
+		
 		// 유저가 선택한 카테고리가 있다면 초기화(페이지 이동에선 이값이 없음.
 		if (map.get("selectedCategory") != null) {
 			int selectedCategory = Integer.parseInt(map.get("selectedCategory").toString());
@@ -402,6 +402,17 @@ public class homeImpl implements HomeController {
 		mav.addObject("page", page);
 		mav.addObject("totalCount", totalCount);
 
+		return mav;
+	}
+
+	@Override
+	public ModelAndView member_set_rate(HttpServletRequest request, HttpSession session) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("Welcom member_set_rate");
+		Map<String, Object> map = func.parseMap(request);
+		System.out.println(map);
+		
+		ModelAndView mav = new ModelAndView("article/keyword_list");
 		return mav;
 	}
 }

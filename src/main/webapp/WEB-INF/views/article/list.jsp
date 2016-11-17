@@ -1,6 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:directive.include file="../share/header.jsp" />
+<style>
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+</style>
 
 <script type="text/javascript">
 function test(id){
@@ -73,19 +113,15 @@ function listPageMove(page){
 </div>
 
 <div>
-
 	<br>
-
 	<div class="dropdown">
-		<button id="dLabel" type="button" data-toggle="dropdown"
-			aria-haspopup="true" aria-expanded="false">
-			요약율선택 <span class="caret"></span>
-		</button>
-		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-			<li>30%</li>
-			<li>40%</li>
-			<li>50%</li>
-		</ul>
+	  <button class="dropbtn">요약율 선택</button>
+	  <div class="dropdown-content">
+	  	<a href="#" onclick = "set_rate(1)">HeadLine</a>
+	    <a href="#" onclick = "set_rate(30)">30%</a>
+	    <a href="#" onclick = "set_rate(40)">40%</a>
+	    <a href="#" onclick = "set_rate(50)">50%</a>
+	  </div>
 	</div>
 </div>
 
@@ -163,6 +199,13 @@ function listPageMove(page){
 		name="selectedCategory" value="">
 </form>
 
+<form method="POST" id="sumRateForm"
+	action="${pageContext.request.contextPath}/member/set_rate">
+	 <input type="hidden" name="rate" value="">
+	 <input type="hidden" name="page" value="1">
+	 <input type="hidden" name="selectedCategory" value="">
+</form>
+
 <script>
 	function loadPage(page) {
 		// 		map 하고 현재 입력한 page를 서버로 전달
@@ -178,6 +221,13 @@ function listPageMove(page){
 		pagingForm.selectedCategory.value = selectedCategory;
 		pagingForm.page.value = 1;
 		pagingForm.submit();
+	}
+	
+	function set_rate(rate){
+		// 요약율 서버로 전달;
+		sumRateForm.rate.value = rate;
+		sumRateForm.selectedCategory.value = ${selectedCategory};
+		sumRateForm.submit();
 	}
 </script>
 <jsp:directive.include file="../share/footer.jsp" />

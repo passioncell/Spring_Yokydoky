@@ -84,6 +84,7 @@ function listPageMove(page){
 			요약율선택 <span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+			<li>Head Line</li>
 			<li>30%</li>
 			<li>40%</li>
 			<li>50%</li>

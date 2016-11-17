@@ -67,6 +67,10 @@ public abstract interface HomeController {
 	@RequestMapping("/member/join")
 	public abstract ModelAndView member_join(HttpServletRequest request, HttpSession session) throws Exception;
 
+	//요약율 설정
+	@RequestMapping("/member/set_rate")
+	public abstract ModelAndView member_set_rate(HttpServletRequest request, HttpSession session) throws Exception;
+	
 	@RequestMapping("/member/logout_submit")
 	ModelAndView member_join_submit(HttpServletRequest request, HttpSession session) throws Exception;
 
