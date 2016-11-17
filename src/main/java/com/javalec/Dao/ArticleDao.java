@@ -16,8 +16,8 @@ public class ArticleDao  extends SqlSessionDaoSupport{
 		return  (Integer) getSqlSession().selectOne("articleDao.getArticleListCount", map);
 	}
 	
-	public List<Map<String, Object>> getKeywordArticleList(List list){
-		return  (List<Map<String, Object>>) getSqlSession().selectList("articleDao.getKeywordArticleList", list);
+	public List<Map<String, Object>> getKeywordArticleList(Map map){
+		return  (List<Map<String, Object>>) getSqlSession().selectList("articleDao.getKeywordArticleList", map);
 	}
 	
 	public List<Map<String, Object>> getArticleRankList(Map map){

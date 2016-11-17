@@ -14,7 +14,7 @@
 				write_date) AS no, id, title, content,
 				reporter, write_date,
 				modify_date, keyword, like_count,
-				FK_ArticleCategory
+				FK_ArticleCategory, url
 				FROM ARTICLE
 				) a
 				WHERE a.no BETWEEN #{start} AND #{end}
@@ -26,7 +26,7 @@
 				write_date) AS no, id, title, content,
 				reporter, write_date,
 				modify_date, keyword, like_count,
-				FK_ArticleCategory
+				FK_ArticleCategory, url
 				FROM ARTICLE
 				WHERE FK_ArticleCategory = #{selectedCategory}
 				) a WHERE a.no BETWEEN
@@ -50,15 +50,21 @@
 	</select>
 
 	<!-- 맞춤추천 기사 목록 가져오기 -->
-	<select id="getKeywordArticleList" resultType="Map" parameterType="List"
+	<select id="getKeywordArticleList" resultType="Map" parameterType="Map"
 		statementType="CALLABLE">
-		SELECT *
+		SELECT * FROM
+		(
+		SELECT ROW_NUMBER() OVER (ORDER BY
+		write_date) AS no, id, title, content, reporter, write_date,
+		modify_date, keyword , like_count, FK_ArticleCategory, url
 		FROM Article 
 		WHERE 
-		<foreach item="item" index="index" collection="list"
+		<foreach item="item" index="index" collection="keywordList"
 	      open="(" separator="or" close=")">
 	        keyword like '%' + #{item} + '%' 
 	 	</foreach>
+	 	) a
+	 	WHERE a.no BETWEEN #{start} AND #{end}
 	</select>
 	
 	<!-- 기사 목록 가져오기 (좋아요순)-->
@@ -70,7 +76,7 @@
 				write_date) AS no, id, title, content,
 				reporter, write_date,
 				modify_date, keyword, like_count,
-				FK_ArticleCategory
+				FK_ArticleCategory, url
 				FROM ARTICLE
 				) a
 				WHERE a.no BETWEEN #{start} AND #{end}

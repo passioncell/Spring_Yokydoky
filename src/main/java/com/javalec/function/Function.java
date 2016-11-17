@@ -51,7 +51,7 @@ public class Function {
 				for(int j=0; j< tmpList1.length; j++){ 
 					tmpList2 = tmpList1[j].split("<symbol1>");
 					
-					if(tmpList2[0].contains("News") ||tmpList2[0].contains("com") || tmpList2[0].contains("동아닷컴")||tmpList2[0].contains("【서울=뉴시스】")||tmpList2[0].contains("사진제공")){
+					if(tmpList2[0].contains("News") ||tmpList2[0].contains("com") ||tmpList2[0].contains("@")|| tmpList2[0].contains("동아닷컴")||tmpList2[0].contains("【서울=뉴시스】")||tmpList2[0].contains("사진제공")){
 						continue;
 					}
 					tmpList2[0] = tmpList2[0].replace("$", "");

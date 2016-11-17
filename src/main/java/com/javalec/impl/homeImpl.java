@@ -93,6 +93,7 @@ public class homeImpl implements HomeController {
 			articleList.get(i).put("content",sumList.get(i));
 		}
 		System.out.println(map);
+		
 //		System.out.println(articleList);
 		ModelAndView mav = new ModelAndView("article/list");
 		mav.addObject("selectedCategory", map.get("selectedCategory"));
@@ -346,6 +347,11 @@ public class homeImpl implements HomeController {
 		String page = "1";
 		int start = 1;
 		int end = 8;
+		
+		// 기본값
+		if(map.get("rate")==null){
+			map.put("rate", "30");
+		}
 
 		// 전체 기사의 수
 		int totalCount = articleDao.getArticleListCount(map);
@@ -371,10 +377,20 @@ public class homeImpl implements HomeController {
 			keywordList.add(tmpKeywordList.get(i).get("keyword").toString());
 		}
 
-
-		List<Map<String, Object>> articleList = articleDao.getKeywordArticleList(keywordList);
-		System.out.println("articleList"+ articleList);
-
+		map.put("keywordList", keywordList);
+		System.out.println(map);
+		List<Map<String, Object>> articleList = articleDao.getKeywordArticleList(map);
+		
+		List<String> sumList = func.extractText(articleList, map.get("rate").toString());
+		
+		for(int i=0; i < sumList.size(); i++){
+			articleList.get(i).remove("content");
+			articleList.get(i).put("content",sumList.get(i));
+		}
+		System.out.println("@@ map : "+map);
+		System.out.println("totalCount : " + totalCount);
+		
+		
 		ModelAndView mav = new ModelAndView("article/keyword_list");
 		mav.addObject("articleList", articleList);
 		mav.addObject("page", page);

@@ -156,7 +156,7 @@ function listPageMove(page){
 </div>
 
 <form method="GET" id="pagingForm"
-	action="${pageContext.request.contextPath}/article/list">
+	action="${pageContext.request.contextPath}/article/keywordList">
 	<input type="hidden" name="page" value=""> 
 </form>
 
@@ -184,8 +184,8 @@ function listPageMove(page){
 	function set_rate(rate){
 		// 요약율 서버로 전달;
 		sumRateForm.rate.value = rate;
-		sumRateForm.selectedCategory.value = ${selectedCategory};
 		sumRateForm.submit();
 	}
 </script>
+
 <jsp:directive.include file="../share/footer.jsp" />

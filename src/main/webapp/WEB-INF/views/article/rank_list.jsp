@@ -156,12 +156,12 @@ function listPageMove(page){
 </div>
 
 <form method="GET" id="pagingForm"
-	action="${pageContext.request.contextPath}/article/list">
+	action="${pageContext.request.contextPath}/article/rankList">
 	<input type="hidden" name="page" value=""> 
 </form>
 
 <form method="POST" id="sumRateForm"
-	action="${pageContext.request.contextPath}/article/keywordList">
+	action="${pageContext.request.contextPath}/article/rankList">
 	 <input type="hidden" name="rate" value="">
 	 <input type="hidden" name="page" value="1">
 	 <input type="hidden" name="selectedCategory" value="">
@@ -184,7 +184,6 @@ function listPageMove(page){
 	function set_rate(rate){
 		// 요약율 서버로 전달;
 		sumRateForm.rate.value = rate;
-		sumRateForm.selectedCategory.value = ${selectedCategory};
 		sumRateForm.submit();
 	}
 </script>
