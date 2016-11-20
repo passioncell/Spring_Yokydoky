@@ -108,7 +108,7 @@ function listPageMove(page){
 			<div class="panel panel-info">
 				<div class="panel-heading">
 					<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-					${item["title"]}
+					<a href = "${item['url']}" >${item["title"]}</a>
 				</div>
 				<div class="panel-body">
 					<p>

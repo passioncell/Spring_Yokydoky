@@ -93,7 +93,7 @@ public class homeImpl implements HomeController {
 			articleList.get(i).put("content",sumList.get(i));
 		}
 		System.out.println(map);
-		
+		System.out.println("@@ articleList" + articleList);
 //		System.out.println(articleList);
 		ModelAndView mav = new ModelAndView("article/list");
 		mav.addObject("selectedCategory", map.get("selectedCategory"));
@@ -405,6 +405,11 @@ public class homeImpl implements HomeController {
 		System.out.println("Welcom article_rank_list");
 		Map<String, Object> map = func.parseMap(request);
 
+		// 기본값
+		if(map.get("rate")==null){
+			map.put("rate", "30");
+		}
+		
 		String page = "1";
 		int start = 1;
 		int end = 8;
@@ -423,8 +428,12 @@ public class homeImpl implements HomeController {
 		map.put("end", end);
 		
 		List<Map<String, Object>> articleList = articleDao.getArticleRankList(map);
-		System.out.println(articleList);
-
+		List<String> sumList = func.extractText(articleList, map.get("rate").toString());
+		for(int i=0; i < sumList.size(); i++){
+			articleList.get(i).remove("content");
+			articleList.get(i).put("content",sumList.get(i));
+		}
+		
 		ModelAndView mav = new ModelAndView("article/rank_list");
 		mav.addObject("articleList", articleList);
 		mav.addObject("page", page);
