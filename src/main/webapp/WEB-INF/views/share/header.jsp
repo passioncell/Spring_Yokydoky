@@ -62,7 +62,7 @@
 
 <!-- Theme CSS -->
 <link
-	href="${pageContext.request.contextPath}/resources/css/clean-blog.min.css"
+	href="${pageContext.request.contextPath}/resources/css/clean-blog.css"
 	rel="stylesheet">
 
 <!-- Custom Fonts -->
@@ -91,7 +91,6 @@
 	<script type='text/javascript' src='${pageContext.request.contextPath}/resources/vendor/jquery/jquery.autocomplete.js'></script>
 
 	<!--  AJAX -->
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
 
 </head>
 
